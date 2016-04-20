@@ -5,6 +5,11 @@
  */
 class Base_Controller extends CI_Controller
 {
+    protected static $group_role = array(
+        1 => '业主',
+        2 => '施工方',
+        3 => '甲方',
+    );
 
     public function __construct()
     {
@@ -17,16 +22,29 @@ class Base_Controller extends CI_Controller
 
 }//end Base_Controller
 
-class Front_Controller extends Base_Controller
+class Wx_Controller extends Base_Controller
 {
     private $meta = array();
     private $title = '';
+    private $state = '99a0e32d0d214d53984b13a24ad9df12';
 
     public function __construct()
     {
         parent::__construct();
         //load libraries
-        $this->load->library(array('session','user_lib'));
+        $this->load->library(array('session','weixin'));
+        $this->wxlogin();
+    }
+
+    public function wxlogin()
+    {
+        if (!$this->user_lib->is_logged_in()) {
+            if ($this->input->get('wx')) {
+                $redirect_uri = site_url('wx/oauth2_base');
+                redirect($this->weixin->get_oauth_url($redirect_uri, $this->state));
+            }
+            show_error('微信授权失败！');
+        }
     }
 
     /**
@@ -61,7 +79,6 @@ class Front_Controller extends Base_Controller
     {
         $this->title = $title;
     }
-
 }
 
 class Admin_Controller extends Base_Controller

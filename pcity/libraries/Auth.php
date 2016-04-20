@@ -5,7 +5,7 @@ class Auth
     private $CI;
 
     //this is the expiration for a non-remember session
-    public $session_expire	= 600;
+    public $session_expire	= 3600;
 
     private $salt = 'qe&2*34$a';
 

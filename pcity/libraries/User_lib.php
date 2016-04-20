@@ -16,7 +16,7 @@ class User_lib extends Abstract_user_lib
         $this->CI->load->database();
 
         $this->CI->load->model(array(
-            'member_model'
+            'weixin_model'
         ));
     }
 
@@ -26,13 +26,10 @@ class User_lib extends Abstract_user_lib
         return empty($user) ? false : true;
     }
 
-    public function login($params)
+    public function login($openid)
     {
-        $user = $this->CI->member_model->get_one(array(
-            'email' => $params['email'],
-            'password' => md5($params['password'] . $this->salt),
-        ));
-        if (!empty($user)) {
+        $user = $this->CI->weixin_model->get_user_by_openid($openid);
+        if (!empty($user) && !empty($user['nickname'])) {
             $this->CI->session->set_userdata(array(
                 'user_auth' => $user
             ));
@@ -40,6 +37,15 @@ class User_lib extends Abstract_user_lib
         } else {
             return false;
         }
+    }
+
+    public function update_user($userinfo)
+    {
+        $user = $this->weixin_model->update_user($userinfo);
+        $this->CI->session->set_userdata(array(
+            'user_auth' => $user
+        ));
+        return $user;
     }
 
     public function logout()

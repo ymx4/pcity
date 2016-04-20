@@ -7,8 +7,23 @@
     <!-- /.col-md-12 -->
 </div>
 <div class="row">
+    <div class="col-md-4">
+        <form>
+            <div class="form-group">
+                <label>样板分类</label>
+                <select class="form-control" name="category">
+                    <?php foreach ($categories as $row) : ?>
+                        <option value="<?php echo $row; ?>"><?php echo $row; ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-default" value="搜索" />
+            </div>
+        </form>
+    </div>
     <div class="col-md-12">
-        <div class="panel panel-primary">
+        <div class="panel panel-default">
             <div class="panel-heading">
                 样板列表
             </div>

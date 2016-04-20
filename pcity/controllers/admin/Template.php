@@ -7,6 +7,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class Template extends Admin_Controller
 {
+    private $categories = array(
+        '交房标准', '物料封样', '样板交底', '综合砌筑样板',
+    );
     public function __construct()
     {
         parent::__construct();
@@ -18,12 +21,16 @@ class Template extends Admin_Controller
         $offset = intval($this->input->get('o'));
         $data   = array(
             'template_list' => array(),
+            'categories' => $this->categories,
         );
+        $where = array('title <>' => '');
+        $category = $this->input->get('category');
+        $where['category'] = $category;
 
-        $count = $this->template_model->get_count(array('title <>' => ''));
+        $count = $this->template_model->get_count($where);
         if ($count) {
             $limit = $this->config->item('page_size');
-            $data['template_list'] = $this->template_model->get_list(array('title <>' => ''), $limit, $offset);
+            $data['template_list'] = $this->template_model->get_list($where, $limit, $offset);
 
             $this->load->library('pagination');
 
@@ -43,8 +50,10 @@ class Template extends Admin_Controller
     {
         $data = array(
             'load_upload' => true,
+            'categories' => $this->categories,
             'template' => array(
                 'title' => '',
+                'category' => '',
                 'image' => '',
                 'process_requirement' => '',
                 'acceptance_criteria' => '',

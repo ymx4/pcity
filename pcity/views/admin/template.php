@@ -9,7 +9,7 @@
 
         <div class="text-num">
             <form role="form" id="fileupload" action="/admin/template/edit<?php if (isset($template['id'])) echo '/' . $template['id'];?>" method="post" enctype="multipart/form-data">
-                <div class="panel panel-primary">
+                <div class="panel panel-default">
                     <div class="panel-heading">
                         样板设置
                     </div>
@@ -17,6 +17,14 @@
                         <div class="form-group">
                             <label>标题</label>
                             <input class="form-control" type="text" name="title" value="<?php if (!empty($template['title'])) echo $template['title'];?>">
+                        </div>
+                        <div class="form-group">
+                            <label>样板分类</label>
+                            <select class="form-control" name="category">
+                                <?php foreach ($categories as $row) : ?>
+                                    <option value="<?php echo $row; ?>"><?php echo $row; ?></option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label>样板图片</label>

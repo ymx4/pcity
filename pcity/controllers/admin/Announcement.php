@@ -65,9 +65,9 @@ class Announcement extends Admin_Controller
                 $data['error'] = '请填写标题';
             }
 
-            if (empty($post['content'])) {
-                $data['error'] = '请填写内容';
-            }
+            // if (empty($post['content'])) {
+            //     $data['error'] = '请填写内容';
+            // }
 
             if (empty($data['error'])) {
                 if ($_FILES['up_file']['error'] != 4) {

@@ -9,7 +9,7 @@
 
         <div class="text-num">
             <form role="form" action="/admin/announcement/edit<?php if (isset($announcement['id'])) echo '/' . $announcement['id'];?>" method="post" enctype="multipart/form-data">
-                <div class="panel panel-primary">
+                <div class="panel panel-default">
                     <div class="panel-heading">
                         公告设置
                     </div>
@@ -23,10 +23,10 @@
                             <?php if (!empty($announcement_file)) echo sprintf('<a href="%s">%s</a>', $announcement_file, $announcement['file_name']); ?>
                             <input type="file" name="up_file">
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label>内容</label>
                             <textarea class="form-control" name="content"><?php if (!empty($announcement['content'])) echo $announcement['content'];?></textarea>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
 
