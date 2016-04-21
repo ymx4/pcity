@@ -135,7 +135,6 @@ CREATE TABLE `wx_user` (
   `province` varchar(100) DEFAULT NULL,
   `language` varchar(255) DEFAULT NULL,
   `headimgurl` varchar(255) DEFAULT NULL,
-  `privilege` varchar(255) DEFAULT NULL,
   `create_time` int(11) DEFAULT NULL,
   `update_time` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),

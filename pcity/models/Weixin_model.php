@@ -82,7 +82,6 @@ class Weixin_model extends MY_Model
         $db_data['country'] = isset($userinfo['country'])?$userinfo['country']:'';
 		$db_data['province'] = isset($userinfo['province'])?$userinfo['province']:'';
 		$db_data['headimgurl'] = isset($userinfo['headimgurl'])?$userinfo['headimgurl']:'';
-        $db_data['privilege'] = isset($userinfo['privilege'])?$userinfo['privilege']:'';
         $db_data['language'] = isset($userinfo['language'])?$userinfo['language']:'';
 		$db_data['update_time'] = time();
 
