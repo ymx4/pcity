@@ -13,11 +13,11 @@ class Wx extends CI_Controller
             show_404();
         }
         $menu = array(
-            'button' => array(
+            'button' => array(array(
                 'type' => 'view',
                 'name' => '测试',
                 'url' => 'http://www.pcity.cc',
-            )
+            ))
         );
         if ($this->weixin->create_menu($menu)) {
             $this->_message();
