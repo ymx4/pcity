@@ -29,9 +29,9 @@ class Wx extends CI_Controller {
     }
 
     /**
-    * base weixin oauth22 , no confirmation for user in weixin client
+    * base weixin oauth2 , no confirmation for user in weixin client
     */
-    public function oauth22_base($redirect_type = 0) {
+    public function oauth2_base($redirect_type = 0) {
         $code = $this->input->get('code');
         $state = $this->input->get('state');
 
@@ -43,7 +43,7 @@ class Wx extends CI_Controller {
             show_error("无效State", 500);
         }
 
-        $token = $this->weixin->get_oauth22_access_token($code);
+        $token = $this->weixin->get_oauth2_access_token($code);
 
         if ($token !== false) {
             $userinfo = $this->user_lib->login($token['openid']);
@@ -55,16 +55,16 @@ class Wx extends CI_Controller {
             }
         }
 
-        $url = $this->weixin->get_oauth22_url(site_url('wx/oauth22/' . $redirect_type), $state, true);
+        $url = $this->weixin->get_oauth2_url(site_url('wx/oauth2/' . $redirect_type), $state, true);
         //echo $url;
         header("Location: $url", 301);
     }
 
     /**
-    * full weixin oauth22 , popup confirmation dialog for user in weixin client
+    * full weixin oauth2 , popup confirmation dialog for user in weixin client
     * get user info 
     */
-    public function oauth22($redirect_type = 0) {
+    public function oauth2($redirect_type = 0) {
         $code = $this->input->get('code');
         $state = $this->input->get('state');
 
@@ -76,7 +76,7 @@ class Wx extends CI_Controller {
             show_error("无效State", 500);
         }
 
-        $token = $this->weixin->get_oauth22_access_token($code);
+        $token = $this->weixin->get_oauth2_access_token($code);
 
         if ($token !== false) {
             $userinfo = $this->weixin->get_userinfo($token['access_token'], $token['openid']);
