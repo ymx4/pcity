@@ -15,14 +15,14 @@ class Wx extends Base_Controller {
             case 1:
             
             default:
-                echo '绑定成功！'
+                echo '绑定成功！';
                 break;
         }
         exit;
     }
 
     public function event()
-    {$this->_showpage(1);exit;
+    {
         $this->load->library('wechatcallback');
         $this->wechatcallback->valid();
     }
