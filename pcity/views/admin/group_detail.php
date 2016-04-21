@@ -30,7 +30,7 @@
                                 <tbody>
                                     <?php foreach ($group_role[$role] as $row) : ?>
                                     <tr id="tr<?php echo $group['id'] . '-' . $row['user_id']; ?>">
-                                        <td width="20%"><img width="100%" src="<?php echo $row['headimgurl'];?>"></td>
+                                        <td><img width="100px" src="<?php echo $row['headimgurl'];?>"></td>
                                         <td><?php echo $row['nickname'];?></td>
                                         <td>
                                             <a onclick="del('<?php echo $group['id'] . '/' . $row['user_id']; ?>', '<?php echo $group['id'] . '-' . $row['user_id']; ?>')" href="javascript:;">删除</a>

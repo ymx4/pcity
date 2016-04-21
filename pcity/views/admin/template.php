@@ -62,9 +62,9 @@
 
 <script id="template-files" type="text/x-tmpl">
     <tr>
-        <td width="20%">
+        <td>
             {% if (o.url) { %}
-                <img width="100%" src="{%=o.url%}">
+                <img width="150px" src="{%=o.url%}">
             {% } %}
         </td>
         <td>

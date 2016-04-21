@@ -31,16 +31,14 @@
                             <tr>
                                 <th>头像</th>
                                 <th>昵称</th>
-                                <th>是否关注</th>
                                 <th>操作</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php foreach ($member_list as $key => $row) :?>
                             <tr>
-                                <td width="20%"><img width="100%" src="<?php echo $row['headimgurl'];?>"></td>
+                                <td><img width="100px" src="<?php echo $row['headimgurl'];?>"></td>
                                 <td><?php echo $row['nickname']; ?></td>
-                                <td><?php echo $row['subscribe'] ? '是' : '否'; ?></td>
                                 <td>
                                     <a href="/admin/group/join/<?php echo $row['id'];?>">加入分组</a>
                                 </td>
