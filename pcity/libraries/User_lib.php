@@ -1,12 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once(APPPATH . '/libraries/Abstract_user_lib.php');
-
-/**
- *
- * User Libraries For Front
- */
-class User_lib extends Abstract_user_lib
+class User_lib
 {
     public $CI;
 

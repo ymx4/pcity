@@ -40,7 +40,7 @@ class Wx_Controller extends Base_Controller
     {
         if (!$this->user_lib->is_logged_in()) {
             if ($this->input->get('wx')) {
-                $redirect_uri = site_url('wx/oauth2_base');
+                $redirect_uri = site_url('wx/oauth_base');
                 redirect($this->weixin->get_oauth_url($redirect_uri, $this->state));
             }
             show_error('微信授权失败！');
