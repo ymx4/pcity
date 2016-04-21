@@ -26,7 +26,7 @@ CREATE TABLE `admin_member` (
 
 /*Data for the table `admin_member` */
 
-insert  into `admin_member`(`uid`,`username`,`password`) values (1,'admin','2cd20a9777fa019d63dc8e918fa8ee33799992f9');
+insert  into `admin_member`(`uid`,`username`,`password`) values (1,'admin','626e2ba2c7a3dc2b9ffe793076ec8c5f4d76c927');
 
 /*Table structure for table `announcement` */
 
@@ -40,11 +40,9 @@ CREATE TABLE `announcement` (
   `create_time` int(11) unsigned DEFAULT '0',
   `update_time` int(11) unsigned DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 /*Data for the table `announcement` */
-
-insert  into `announcement`(`id`,`title`,`file_name`,`content`,`create_time`,`update_time`) values (2,'测试1333','aaaaaa.docx','测试测试111',1460706622,1460992621);
 
 /*Table structure for table `group` */
 
@@ -56,11 +54,9 @@ CREATE TABLE `group` (
   `create_time` int(11) unsigned DEFAULT '0',
   `update_time` int(11) unsigned DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 /*Data for the table `group` */
-
-insert  into `group`(`id`,`title`,`create_time`,`update_time`) values (1,'2-2-4',1461142333,1461142333);
 
 /*Table structure for table `group_role` */
 
@@ -74,8 +70,6 @@ CREATE TABLE `group_role` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 /*Data for the table `group_role` */
-
-insert  into `group_role`(`group_id`,`user_id`,`role`) values (1,1,2);
 
 /*Table structure for table `task` */
 
@@ -108,11 +102,9 @@ CREATE TABLE `template` (
   `create_time` int(11) unsigned DEFAULT '0',
   `update_time` int(11) unsigned DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 /*Data for the table `template` */
-
-insert  into `template`(`id`,`title`,`category`,`image`,`process_requirement`,`acceptance_criteria`,`manage_level`,`location`,`create_time`,`update_time`) values (1,'test','','[\"1460991073.jpg\",\"1460991074.jpg\"]','test','test','test','test',0,1460991082);
 
 /*Table structure for table `wx_data_store` */
 
@@ -135,7 +127,6 @@ DROP TABLE IF EXISTS `wx_user`;
 
 CREATE TABLE `wx_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `subscribe` int(11) DEFAULT NULL,
   `openid` varchar(255) DEFAULT NULL,
   `nickname` varchar(100) DEFAULT NULL,
   `sex` tinyint(4) DEFAULT NULL,
@@ -144,17 +135,14 @@ CREATE TABLE `wx_user` (
   `province` varchar(100) DEFAULT NULL,
   `language` varchar(255) DEFAULT NULL,
   `headimgurl` varchar(255) DEFAULT NULL,
-  `subscribe_time` int(11) DEFAULT NULL,
-  `groupid` int(11) DEFAULT NULL,
+  `privilege` varchar(255) DEFAULT NULL,
   `create_time` int(11) DEFAULT NULL,
   `update_time` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `openid` (`openid`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 /*Data for the table `wx_user` */
-
-insert  into `wx_user`(`id`,`subscribe`,`openid`,`nickname`,`sex`,`city`,`country`,`province`,`language`,`headimgurl`,`subscribe_time`,`groupid`,`create_time`,`update_time`) values (1,1,'1234','test',NULL,NULL,NULL,NULL,NULL,'https://avatars1.githubusercontent.com/u/4393469?v=3&s=40',NULL,NULL,NULL,NULL);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
