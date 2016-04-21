@@ -1,13 +1,12 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Wx extends CI_Controller {
+class Wx extends Base_Controller {
 
     private static $WX_UPDATE_DURATION = 604800;// 1 week for update user info
 
     public function __construct(){
         parent::__construct();
-        $this->load->library('weixin');
-        $this->load->library('session', 'user_lib');
+        $this->load->library(array('weixin','session', 'user_lib'));
     }
 
     private function _showpage($redirect_type)

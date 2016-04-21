@@ -35,7 +35,7 @@ class User_lib
 
     public function update_user($userinfo)
     {
-        $user = $this->weixin_model->update_user($userinfo);
+        $user = $this->CI->weixin_model->update_user($userinfo);
         $this->CI->session->set_userdata(array(
             'user_auth' => $user
         ));
