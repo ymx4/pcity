@@ -15,7 +15,7 @@ class Wx extends Base_Controller {
             case 1:
             
             default:
-                $this->view('bind');
+                $this->load->view('bind');
                 break;
         }
         exit;
@@ -30,7 +30,7 @@ class Wx extends Base_Controller {
     /**
     * base weixin oauth2 , no confirmation for user in weixin client
     */
-    public function oauth2_base($redirect_type = 0) {
+    public function oauth2_base($redirect_type = 1) {
         $code = $this->input->get('code');
         $state = $this->input->get('state');
 
@@ -63,7 +63,7 @@ class Wx extends Base_Controller {
     * full weixin oauth2 , popup confirmation dialog for user in weixin client
     * get user info 
     */
-    public function oauth2($redirect_type = 0) {
+    public function oauth2($redirect_type = 1) {
         $code = $this->input->get('code');
         $state = $this->input->get('state');
 
