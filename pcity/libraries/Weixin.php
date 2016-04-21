@@ -8,11 +8,11 @@ class Weixin
 
     private $_APPSECRET = '7dd97262b416e07ae22dc31735dd8497'; 
 
-    const WX_OAUTH_ACCESS_TOKEN_URL = "https://api.weixin.qq.com/sns/oauth/access_token?appid=%s&secret=%s&code=%s&grant_type=authorization_code";
+    const WX_OAUTH2_ACCESS_TOKEN_URL = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=%s&secret=%s&code=%s&grant_type=authorization_code";
 
     const WX_USERINFO_URL = "https://api.weixin.qq.com/sns/userinfo?access_token=%s&openid=%s&lang=zh_CN";
 
-    const WX_OAUTH_URL = "https://open.weixin.qq.com/connect/oauth/authorize?appid=%s&redirect_uri=%s&response_type=code&scope=%s&state=%s#wechat_redirect";
+    const WX_OAUTH2_URL = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=%s&redirect_uri=%s&response_type=code&scope=%s&state=%s#wechat_redirect";
 
     const WX_ACCESS_TOKEN_URL = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s";
 
@@ -121,26 +121,26 @@ class Weixin
         return false;
     }
 
-    public function get_oauth_url($redirect_uri,$state,$userinfo = false){
+    public function get_oauth2_url($redirect_uri,$state,$userinfo = false){
          if ($userinfo === TRUE){
             $scope = "snsapi_userinfo";
          }else{
             $scope = "snsapi_base";
          }
 
-         $oauth_url = sprintf(Weixin::WX_OAUTH_URL,$this->_APPID,urlencode($redirect_uri),$scope,$state);
-         return $oauth_url;
+         $oauth2_url = sprintf(Weixin::WX_OAUTH2_URL,$this->_APPID,urlencode($redirect_uri),$scope,$state);
+         return $oauth2_url;
     }
 
-    public function get_oauth_access_token($code){
-        $access_token_url = sprintf(Weixin::WX_OAUTH_ACCESS_TOKEN_URL,$this->_APPID,$this->_APPSECRET,$code);
+    public function get_oauth2_access_token($code){
+        $access_token_url = sprintf(Weixin::WX_OAUTH2_ACCESS_TOKEN_URL,$this->_APPID,$this->_APPSECRET,$code);
 
         $response = wx_curl_https_post($access_token_url, array(), array(), 5);
 
         if ($response != NULL){
             $tmp_data = json_decode($response,true);
             if (isset($tmp_data['errcode'])){
-                log_message('error', 'WX:get_oauth_access_token-'.$tmp_data['errcode'].':'.$tmp_data['errmsg']); 
+                log_message('error', 'WX:get_oauth2_access_token-'.$tmp_data['errcode'].':'.$tmp_data['errmsg']); 
                 return false;  
             }
 

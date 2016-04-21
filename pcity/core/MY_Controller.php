@@ -35,13 +35,13 @@ class Wx_Controller extends Base_Controller
         $this->load->library(array('session','weixin','user_lib'));
         $this->wxlogin();
     }
-
+https://open.weixin.qq.com/connect/oauth22/authorize?appid=wx35de4aedd8758e5e&redirect_uri=http%3A%2F%2Fwww.pcity.cc%2Fwx%2Foauth22_base&response_type=code&scope=snsapi_base&state=99a0e32d0d214d53984b13a24ad9df12#wechat_redirect
     public function wxlogin()
     {
         if (!$this->user_lib->is_logged_in()) {
             if ($this->input->get('wx')) {
-                $redirect_uri = site_url('wx/oauth_base');
-                redirect($this->weixin->get_oauth_url($redirect_uri, $this->state));
+                $redirect_uri = site_url('wx/oauth22_base');
+                redirect($this->weixin->get_oauth22_url($redirect_uri, $this->state));
             }
             show_error('微信授权失败！');
         }
