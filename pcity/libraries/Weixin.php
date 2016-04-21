@@ -37,7 +37,7 @@ class Weixin
 
     public function save_media($media_id,$state = ''){
         $token = $this->get_access_token();
-        if ($token !== flase){
+        if ($token !== false){
             $media_url = sprintf(Weixin::WX_GET_MEDIA,$token,$media_id);
             $data = wx_curl_http_get_media($media_url,20);
 
@@ -48,11 +48,11 @@ class Weixin
                     $file_name = $match[1];
                 }else{
                     log_message('error','fetch_media:'.print_r($info,true));
-                    return flase;
+                    return false;
                 }
             }else{
                 log_message('error','fetch_media:'.print_r($info,true));
-                return flase;
+                return false;
             }
 
             $dir = 'uploads/weixin';
@@ -85,7 +85,7 @@ class Weixin
                 $tmp_data = json_decode($response,true);
                 if (isset($tmp_data['errcode']) && $tmp_data['errcode'] != 0){
                     log_message('error', 'WX:get_jsapi_ticket-'.$tmp_data['errcode'].':'.$tmp_data['errmsg']);   
-                    return flase;  
+                    return false;  
                 }
 
                 $this->CI->weixin_model->set_store_data($this->_APPID,'jsapi_ticket', $tmp_data['ticket'], $tmp_data['expires_in']);
@@ -95,7 +95,7 @@ class Weixin
         }else{
             return $rt;
         }
-        return flase;
+        return false;
     }
 
     public function get_access_token(){
@@ -108,7 +108,7 @@ class Weixin
                 $tmp_data = json_decode($response,true);
                 if (isset($tmp_data['errcode'])){
                     log_message('error', 'WX:get_access_token-'.$tmp_data['errcode'].':'.$tmp_data['errmsg']);   
-                    return flase;  
+                    return false;  
                 }
 
                 $this->CI->weixin_model->set_store_data($this->_APPID,'access_token', $tmp_data['access_token'], $tmp_data['expires_in']);
@@ -118,10 +118,10 @@ class Weixin
         }else{
             return $rt;
         }
-        return flase;
+        return false;
     }
 
-    public function get_oauth_url($redirect_uri,$state,$userinfo = flase){
+    public function get_oauth_url($redirect_uri,$state,$userinfo = false){
          if ($userinfo === TRUE){
             $scope = "snsapi_userinfo";
          }else{
@@ -141,20 +141,20 @@ class Weixin
             $tmp_data = json_decode($response,true);
             if (isset($tmp_data['errcode'])){
                 log_message('error', 'WX:get_oauth2_access_token-'.$tmp_data['errcode'].':'.$tmp_data['errmsg']); 
-                return flase;  
+                return false;  
             }
 
             if (isset($tmp_data['access_token']) && isset($tmp_data['openid'])){
                 return array('access_token'=>$tmp_data['access_token'],'openid'=>$tmp_data['openid']);
             }
         }
-        return flase;
+        return false;
     }
 
     public function create_menu($menu)
     {
         $token = $this->get_access_token();
-        if ($token !== flase){
+        if ($token !== false){
             $url = sprintf(self::WX_CREATE_MENU, $token);
 
             $response = wx_curl_https_post($url, $menu, array(), 5);
@@ -164,7 +164,7 @@ class Weixin
                 if (isset($tmp_data['errcode'])){
                     if ($tmp_data['errcode']) {
                         log_message('error', 'WX:create_menu-'.$tmp_data['errcode'].':'.$tmp_data['errmsg']);
-                        return flase;
+                        return false;
                     } else {
                         return true;
                     }
@@ -174,7 +174,7 @@ class Weixin
             }
         }
 
-        return flase;
+        return false;
     }
 
     public function get_userinfo($access_token,$openid){
@@ -186,7 +186,7 @@ class Weixin
             $tmp_data = json_decode($response,true);
             if (isset($tmp_data['errcode'])){
                 log_message('error', 'WX:get_userinfo-'.$tmp_data['errcode'].':'.$tmp_data['errmsg']);
-                return flase;     
+                return false;     
             }
 
             if (isset($tmp_data['openid'])){
@@ -194,10 +194,10 @@ class Weixin
             }
         }
 
-        return flase;
+        return false;
     }
 
-    public function get_js_config($url,$apiList,$debug = flase){
+    public function get_js_config($url,$apiList,$debug = false){
 
         /* API list
         onMenuShareTimeline
@@ -244,7 +244,7 @@ class Weixin
         $config['nonceStr'] = "pc".rand(10,9999)."ity".rand(10,9999);
 
         $token = $this->get_access_token();
-        if ($token !== flase){
+        if ($token !== false){
             $ticket = $this->get_jsapi_ticket($token);
             $string = "jsapi_ticket={$ticket}&noncestr={$config['nonceStr']}&timestamp={$config['timestamp']}&url={$url}";
             $config['signature'] = sha1($string);
@@ -253,7 +253,7 @@ class Weixin
         }
 
 
-        return flase;
+        return false;
     }
 
 }
