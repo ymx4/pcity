@@ -31,6 +31,7 @@
                             <tr>
                                 <th>头像</th>
                                 <th>昵称</th>
+                                <th>绑定时间</th>
                                 <th>操作</th>
                             </tr>
                         </thead>
@@ -39,6 +40,7 @@
                             <tr>
                                 <td><img width="100px" src="<?php echo $row['headimgurl'];?>"></td>
                                 <td><?php echo $row['nickname']; ?></td>
+                                <td><?php echo $row['create_time']; ?></td>
                                 <td>
                                     <a href="/admin/group/join/<?php echo $row['id'];?>">加入分组</a>
                                 </td>
