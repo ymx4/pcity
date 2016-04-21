@@ -15,7 +15,7 @@ class Wx extends CI_Controller
         $menu = array(
             'button' => array(array(
                 'type' => 'view',
-                'name' => '测试',
+                'name' => '开发中',
                 'url' => 'http://www.pcity.cc',
             ))
         );
