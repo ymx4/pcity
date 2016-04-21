@@ -22,6 +22,12 @@ class Wx extends CI_Controller {
         exit;
     }
 
+    public function event()
+    {
+        $this->load->library('wechatcallback');
+        $this->wechatcallback->valid();
+    }
+
     /**
     * base weixin oauth , no confirmation for user in weixin client
     */

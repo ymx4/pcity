@@ -4,9 +4,9 @@ class Weixin
 {
     private $CI;
 
-    private $_APPID = '';
+    private $_APPID = 'wx35de4aedd8758e5e';
 
-    private $_APPSECRET = ''; 
+    private $_APPSECRET = '7dd97262b416e07ae22dc31735dd8497'; 
 
     const WX_OAUTH2_ACCESS_TOKEN_URL = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=%s&secret=%s&code=%s&grant_type=authorization_code";
 
