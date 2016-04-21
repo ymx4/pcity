@@ -20,6 +20,8 @@ class Weixin
 
     const WX_GET_MEDIA = "https://api.weixin.qq.com/cgi-bin/media/get?access_token=%s&media_id=%s";
 
+    const WX_CREATE_MENU = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=%s";
+
     public function __construct(array $config = array()){
         $this->CI =& get_instance();
         $this->CI->load->helper('weixin');
@@ -146,6 +148,32 @@ class Weixin
                 return array('access_token'=>$tmp_data['access_token'],'openid'=>$tmp_data['openid']);
             }
         }
+        return flase;
+    }
+
+    public function create_menu($menu)
+    {
+        $token = $this->get_access_token();
+        if ($token !== flase){
+            $url = sprintf(self::WX_CREATE_MENU, $token);
+
+            $response = wx_curl_https_post($url, $menu, array(), 5);
+
+            if ($response != NULL){
+                $tmp_data = json_decode($response, true);
+                if (isset($tmp_data['errcode'])){
+                    if ($tmp_data['errcode']) {
+                        log_message('error', 'WX:create_menu-'.$tmp_data['errcode'].':'.$tmp_data['errmsg']);
+                        return flase;
+                    } else {
+                        return true;
+                    }
+                } else {
+                    log_message('error', 'WX:create_menu-no-return');
+                }
+            }
+        }
+
         return flase;
     }
 
