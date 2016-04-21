@@ -32,7 +32,7 @@ class Wx_Controller extends Base_Controller
     {
         parent::__construct();
         //load libraries
-        $this->load->library(array('session','weixin'));
+        $this->load->library(array('session','weixin','user_lib'));
         $this->wxlogin();
     }
 
