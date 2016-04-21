@@ -76,13 +76,16 @@ class Weixin_model extends MY_Model
 	public function update_user($userinfo){
 		$db_data = array();
 		$openid = $db_data['openid'] = $userinfo['openid'];
+        $db_data['subscribe'] = isset($userinfo['subscribe'])?$userinfo['subscribe']:0;
 		$db_data['nickname'] = isset($userinfo['nickname'])?$userinfo['nickname']:'unknown_nickname';
+        $db_data['sex'] = isset($userinfo['sex'])?intval($userinfo['sex']):0;
+        $db_data['city'] = isset($userinfo['city'])?$userinfo['city']:'';
+        $db_data['country'] = isset($userinfo['country'])?$userinfo['country']:'';
 		$db_data['province'] = isset($userinfo['province'])?$userinfo['province']:'';
-		$db_data['city'] = isset($userinfo['city'])?$userinfo['city']:'';
-		$db_data['country'] = isset($userinfo['country'])?$userinfo['country']:'';
+        $db_data['language'] = isset($userinfo['language'])?$userinfo['language']:'';
 		$db_data['headimgurl'] = isset($userinfo['headimgurl'])?$userinfo['headimgurl']:'';
-		$db_data['sex'] = isset($userinfo['sex'])?intval($userinfo['sex']):1;
-		$db_data['language'] = isset($userinfo['language'])?$userinfo['language']:'';
+        $db_data['subscribe_time'] = isset($userinfo['subscribe_time'])?$userinfo['subscribe_time']:0;
+        $db_data['groupid'] = isset($userinfo['groupid'])?$userinfo['groupid']:0;
 		$db_data['update_time'] = time();
 
 		$this->db->select('*');
