@@ -54,7 +54,7 @@ class Announcement extends Admin_Controller
             if (empty($announcementfile)) {
                 show_404();
             }
-            $data['announcement_file'] = site_url($this->config->item('announcement_file_path') . $announcementfile['file_name']);
+            $data['announcement_file'] = '/announcement/download/' . $announcementfile['id'];
         }
 
         $post = $this->input->post();
@@ -75,7 +75,7 @@ class Announcement extends Admin_Controller
 
                     $upConfig = array(
                         'upload_path'   => FCPATH . $this->config->item('announcement_file_path'),
-                        'allowed_types' => 'doc|docx|pdf',
+                        'allowed_types' => 'doc|docx|pdf|jpg|jpeg|png',
                         'max_size'      => $this->config->item('size_limit'),
                     );
                     if (preg_match('/[^a-zA-Z0-9-_.]/', $_FILES['up_file']['name'])) {
@@ -92,9 +92,8 @@ class Announcement extends Admin_Controller
                         $data['announcement'] = array_merge($data['announcement'], $post);
 
                         $data['announcement']['file_name'] = $post['file_name'] = $updata['file_name'];
-                        $data['announcement_file'] = site_url($this->config->item('announcement_file_path') . $updata['file_name']);
 
-                        if (empty($data['error']) && $id && file_exists($upConfig['upload_path'] . $announcementfile['file_name'])) {
+                        if (empty($data['error']) && $id && $announcementfile['file_name'] && file_exists($upConfig['upload_path'] . $announcementfile['file_name'])) {
                             unlink($upConfig['upload_path'] . $announcementfile['file_name']);
                         }
                     }
@@ -104,7 +103,10 @@ class Announcement extends Admin_Controller
                     $this->announcement_model->update($post, array('id' => $id));
                 } else {
                     $post['create_time'] = $post['update_time'] = time();
-                    $data['announcement']['id'] = $this->announcement_model->insert($post);
+                    $data['announcement']['id'] = $id = $this->announcement_model->insert($post);
+                }
+                if (isset($uploaded) && $uploaded) {
+                    $data['announcement_file'] = '/announcement/download/' . $id;
                 }
 
                 $data['status'] = 1;

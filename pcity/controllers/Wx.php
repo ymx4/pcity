@@ -6,7 +6,7 @@ class Wx extends Base_Controller {
 
     public function __construct(){
         parent::__construct();
-        $this->load->library(array('weixin','session', 'user_lib'));
+        $this->load->library(array('weixin', 'user_lib'));
     }
 
     private function _showpage($redirect_type)

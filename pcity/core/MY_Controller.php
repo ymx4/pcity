@@ -10,22 +10,58 @@ class Base_Controller extends CI_Controller
         2 => '施工方',
         3 => '甲方',
     );
+    protected static $announcement_type = array(
+        1 => '公司文件',
+        2 => '图纸变更',
+        3 => '其他文件',
+    );
+    protected static $template_categories = array(
+        1 => '工艺样板',
+        2 => '物料封样',
+        3 => '综合砌筑样板',
+        4 => '交房样板',
+    );
 
     public function __construct()
     {
-
         parent::__construct();
 
         $this->load->helper('url');
 
     }//end __construct()
 
+    public function response($data = '', $extra = false)
+    {
+        if (empty($data)) {
+            echo json_encode(array('code' => 1));
+            exit;
+        } elseif (is_string($data)) {
+            echo json_encode(array(
+                'code' => 0,
+                'msg' => $data,
+            ));
+            exit;
+        } else {
+            if ($extra) {
+                echo json_encode(array_merge(array(
+                    'code' => 1,
+                    'data' => $data,
+                ), $extra));
+            } else {
+                echo json_encode(array(
+                    'code' => 1,
+                    'data' => $data,
+                ));
+            }
+            exit;
+        }
+    }
+
 }//end Base_Controller
 
 class Wx_Controller extends Base_Controller
 {
-    private $meta = array();
-    private $title = '';
+    private $title = '孔雀城';
     private $state = '99a0e32d0d214d53984b13a24ad9df12';
 
     public function __construct()
@@ -33,6 +69,9 @@ class Wx_Controller extends Base_Controller
         parent::__construct();
         //load libraries
         $this->load->library(array('session','weixin','user_lib'));
+        $this->session->set_userdata(array(
+            'user_auth' => array('id' => 1, 'nickname' => 'Hypnos'),
+        ));//TODO
         $this->wxlogin();
     }
 
@@ -57,21 +96,10 @@ class Wx_Controller extends Base_Controller
             $result	= $this->load->view($view, $vars, true);
             return $result;
         } else {
+            $vars['ptitle'] = $this->title;
+            $vars['announcement_type'] = self::$announcement_type;
+            $vars['template_categories'] = self::$template_categories;
             $this->load->view($view, $vars);
-        }
-    }
-
-    public function head_meta($meta)
-    {
-        if (isset($meta['name'])) {
-            $meta = array($meta);
-        }
-        foreach ($meta as $row) {
-            $row['content'] = strip_tags($row['content']);
-            if ('description' == $row['name'] && mb_strlen($row['content']) > 100) {
-                $row['content'] = mb_substr($row['content'], 0, 100);
-            }
-            array_push($this->meta, $row);
         }
     }
 
@@ -94,26 +122,6 @@ class Admin_Controller extends Base_Controller
             'username' => $this->curUser['username']
         ));
         $this->load->helper('admin');
-    }
-
-    public function response($data = '')
-    {
-        if (empty($data)) {
-            echo json_encode(array('code' => 1));
-            exit;
-        } elseif (is_string($data)) {
-            echo json_encode(array(
-                'code' => 0,
-                'msg' => $data,
-            ));
-            exit;
-        } else {
-            echo json_encode(array(
-                'code' => 1,
-                'data' => $data,
-            ));
-            exit;
-        }
     }
 }
 
