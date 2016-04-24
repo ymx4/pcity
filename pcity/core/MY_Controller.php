@@ -15,11 +15,52 @@ class Base_Controller extends CI_Controller
         2 => '图纸变更',
         3 => '其他文件',
     );
+    protected static $template_fields = array(
+        'process_requirement' => '工艺要求',
+        'acceptance_criteria' => '验收标准',
+        'manage_level' => '管控等级',
+        'location' => '样板位置',
+        'disclosure_criteria' => '交房标准',
+        'materiel_name' => '物料名称',
+        'materiel_mfr' => '生产厂家',
+        'materiel_specificatio' => '材料规格',
+        'materiel_range' => '使用范围',
+        'host' => '主持人',
+        'disclosure' => '交底内容',
+        'attendee' => '参加人员',
+        'adjustment' => '',
+    );
     protected static $template_categories = array(
-        1 => '工艺样板',
-        2 => '物料封样',
-        3 => '综合砌筑样板',
-        4 => '交房样板',
+        1 => array(
+            'name' => '工艺样板',
+            'fields' => array(
+                'process_requirement', 'acceptance_criteria', 'manage_level', 'location'
+            ),
+        ),
+        2 => array(
+            'name' => '物料封样',
+            'fields' => array(
+                'materiel_name', 'materiel_mfr', 'materiel_specificatio', 'materiel_range', 'acceptance_criteria', 'location'
+            ),
+        ),
+        3 => array(
+            'name' => '综合砌筑样板',
+            'fields' => array(
+                'disclosure_criteria', 'adjustment', 'location'
+            ),
+        ),
+        4 => array(
+            'name' => '交房样板',
+            'fields' => array(
+                'disclosure_criteria', 'location'
+            ),
+        ),
+        5 => array(
+            'name' => '样板交底',
+            'fields' => array(
+                'host', 'disclosure', 'attendee'
+            ),
+        ),
     );
 
     public function __construct()

@@ -82,6 +82,11 @@
 		                </li>
 		            </ul>
 		            <ul class="nav" id="side-menu">
+		                <li<?php echo ($tab == 'task') ? ' class="active"' : '';?>>
+		                    <a href="/admin/task"><i class="fa fa-edit fa-fw"></i> 任务</a>
+		                </li>
+		            </ul>
+		            <ul class="nav" id="side-menu">
 		                <li<?php echo ($tab == 'template') ? ' class="active"' : '';?>>
 		                    <a href="/admin/template"><i class="fa fa-edit fa-fw"></i> 样板库</a>
 		                </li>

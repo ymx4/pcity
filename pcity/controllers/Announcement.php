@@ -11,6 +11,7 @@ class Announcement extends Wx_Controller {
 
 	public function index()
 	{
+        $this->head_title('公告');
 		$this->view('announcement_list');
 	}
 

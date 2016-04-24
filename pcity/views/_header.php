@@ -33,7 +33,7 @@
 <!--在这里编写你的代码-->
 
 <header class="bar bar-nav">
-  <h1 class="navbar-title navbar-center">公告</h1>
+  <h1 class="navbar-title navbar-center"><?php echo $ptitle; ?></h1>
   <!-- 按钮触发器， 需要指定 target -->
   <img class="am-btn am-btn-primary left-t" data-am-offcanvas="{target: '#doc-oc-demo2', effect: 'push'}" src="/assets/wx/images/san.jpg">
   <!-- 侧边栏内容 -->
@@ -60,7 +60,7 @@
                 </a>
                 <ul class="am-list am-collapse admin-sidebar-sub" id="user-nav">
                     <?php foreach ($template_categories as $k => $v) : ?>
-                      <li><a href="/template/index/<?php echo $k; ?>"><?php echo $v; ?></a></li>
+                      <li><a href="/template/index/<?php echo $k; ?>"><?php echo $v['name']; ?></a></li>
                     <?php endforeach; ?>
                 </ul>
               </li>

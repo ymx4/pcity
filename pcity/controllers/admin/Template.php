@@ -22,7 +22,9 @@ class Template extends Admin_Controller
         );
         $where = array('title <>' => '');
         $category = $this->input->get('category');
-        $where['category'] = $category;
+        if (!empty($category)) {
+            $where['category'] = $category;
+        }
 
         $count = $this->template_model->get_count($where);
         if ($count) {
@@ -43,22 +45,24 @@ class Template extends Admin_Controller
         $this->load->view('admin/template_list', $data);
     }
 
-    public function edit($id = 0)
+    public function edit($cid, $id = 0)
     {
         $data = array(
             'load_upload' => true,
-            'categories' => self::$template_categories,
-            'template' => array(
-                'title' => '',
-                'category' => '',
-                'image' => '',
-                'process_requirement' => '',
-                'acceptance_criteria' => '',
-                'manage_level' => '',
-                'location' => '',
-            ),
             'status' => 0,
+            'cid' => $cid,
         );
+        if (!isset(self::$template_categories[$cid])) {
+            redirect('/admin/template');
+        } else {
+            $data['fields'] = array();
+            foreach (self::$template_categories[$cid]['fields'] as $key) {
+                $data['fields'][$key] = array(
+                    'label' => self::$template_fields[$key],
+                );
+            }
+            $data['all_fields'] = self::$template_fields;
+        }
 
         if ($id) {
             $data['template'] = $this->template_model->get_one(array('id' => $id));
@@ -69,6 +73,11 @@ class Template extends Admin_Controller
             $data['template'] = $this->template_model->get_one(array('title' => ''));
             if (!empty($data['template'])) {
                 $id = $data['template']['id'];
+            } else {
+                $data['template'] = array(
+                    'title' => '',
+                    'image' => '',
+                );
             }
         }
         if (!empty($data['template']['image'])) {
@@ -97,6 +106,7 @@ class Template extends Admin_Controller
                     $this->template_model->update($post, array('id' => $id));
                 } else {
                     $post['create_time'] = $post['update_time'] = time();
+                    $post['category'] = $cid;
                     $data['template']['id'] = $this->template_model->insert($post);
                 }
 
@@ -148,8 +158,8 @@ class Template extends Admin_Controller
                     $template_image = array();
                 } else {
                     $template_image = json_decode($template['image'], true);
-                    $template_image[] = $imagedata['file_name'];
                 }
+                $template_image[] = $imagedata['file_name'];
                 $this->template_model->update(array(
                     'image' => json_encode($template_image),
                 ), array('id' => $template['id']));

@@ -8,7 +8,7 @@
         </h1>
 
         <div class="text-num">
-            <form role="form" id="fileupload" action="/admin/template/edit<?php if (isset($template['id'])) echo '/' . $template['id'];?>" method="post" enctype="multipart/form-data">
+            <form role="form" id="fileupload" action="/admin/template/edit/<?php echo (isset($template['id'])) ? $cid . '/' . $template['id'] : $cid;?>" method="post" enctype="multipart/form-data">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         样板设置
@@ -19,14 +19,6 @@
                             <input class="form-control" type="text" name="title" value="<?php if (!empty($template['title'])) echo $template['title'];?>">
                         </div>
                         <div class="form-group">
-                            <label>样板分类</label>
-                            <select class="form-control" name="category">
-                                <?php foreach ($categories as $row) : ?>
-                                    <option value="<?php echo $row; ?>"><?php echo $row; ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-                        <div class="form-group">
                             <label>样板图片</label>
                             <span class="btn btn-success fileinput-button">
                                 <i class="glyphicon glyphicon-plus"></i>
@@ -35,22 +27,12 @@
                             </span>
                         </div>
                         <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
-                        <div class="form-group">
-                            <label>工艺要求</label>
-                            <textarea class="form-control" name="process_requirement"><?php if (!empty($template['process_requirement'])) echo $template['process_requirement'];?></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label>验收标准</label>
-                            <textarea class="form-control" name="acceptance_criteria"><?php if (!empty($template['acceptance_criteria'])) echo $template['acceptance_criteria'];?></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label>管控等级</label>
-                            <input class="form-control" type="text" name="manage_level" value="<?php if (!empty($template['manage_level'])) echo $template['manage_level'];?>">
-                        </div>
-                        <div class="form-group">
-                            <label>样板位置</label>
-                            <input class="form-control" type="text" name="location" value="<?php if (!empty($template['location'])) echo $template['location'];?>">
-                        </div>
+                        <?php foreach ($fields as $key => $value) : ?>
+                            <div class="form-group">
+                                <label><?php echo $value['label']; ?></label>
+                                <textarea class="form-control" name="<?php echo $key; ?>"><?php if (!empty($template[$key])) echo $template[$key];?></textarea>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
 
