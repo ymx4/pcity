@@ -8,7 +8,7 @@
         </h1>
 
         <div class="text-num">
-            <form role="form" action="/admin/group/join" method="post">
+            <form role="form" action="/admin/group/join/<?php echo $user_id; ?>" method="post">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         将用户加入分组
@@ -16,7 +16,7 @@
                     <div class="panel-body">
                         <div class="form-group">
                             <label>用户</label>
-                            <input type="text" name="nickname" value="<?php echo $nickname; ?>" />
+                            <input type="text" name="nickname" value="<?php echo $nickname; ?>"<?php if ($user_id) echo 'disabled="disabled"'; ?> />
                         </div>
                         <div class="form-group">
                             <label>分组</label>

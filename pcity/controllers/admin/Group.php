@@ -83,6 +83,10 @@ class Group extends Admin_Controller
         $data = array('code' => 0);
         $group = $this->group_model->get_one(array('id' => $id));
         if (!empty($group)) {
+            $this->load->model('group_role_model');
+            $this->group_role_model->delete(array(
+                'group_id' => $id,
+            ));
             $this->group_model->delete(array('id' => $id));
             $data['code'] = 1;
         }
@@ -95,6 +99,7 @@ class Group extends Admin_Controller
             'roles' => self::$group_role,
             'nickname' => '',
             'group' => '',
+            'user_id' => $user_id,
         );
         $this->load->model('weixin_model');
         if ($user_id) {
@@ -122,13 +127,15 @@ class Group extends Admin_Controller
             if (empty($post['group'])) {
                 $data['error'] = '请填写分组';
             }
-            if (empty($post['nickname'])) {
+            if (!$user_id && empty($post['nickname'])) {
                 $data['error'] = '请填写用户昵称';
             }
             if (empty($data['error'])) {
                 $this->load->model(array('group_role_model'));
                 $group = $this->group_model->get_one(array('title' => $post['group']));
-                $member = $this->weixin_model->get_one(array('nickname' => $post['nickname']));
+                if (!$user_id) {
+                    $member = $this->weixin_model->get_one(array('nickname' => $post['nickname']));
+                }
                 if (empty($group)) {
                     $data['error'] = '分组不存在';
                 } elseif (empty($member)) {
