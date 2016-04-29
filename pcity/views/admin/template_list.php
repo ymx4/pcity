@@ -44,7 +44,7 @@
                             <tr id="tr<?php echo $row['id'];?>">
                                 <td><?php echo $key + 1;?></td>
                                 <td><?php echo $row['title'];?></td>
-                                <td><a href="/admin/template/edit/<?php echo $row['id'];?>">修改</a>
+                                <td><a href="/admin/template/edit/<?php echo $row['category']; ?>/<?php echo $row['id'];?>">修改</a>
                                     <a onclick="del(<?php echo $row['id'];?>)" href="javascript:;">删除</a>
                                 </td>
                             </tr>

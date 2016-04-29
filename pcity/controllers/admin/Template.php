@@ -22,7 +22,7 @@ class Template extends Admin_Controller
         );
         $where = array('title <>' => '');
         $category = $this->input->get('category');
-        if (!empty($category)) {
+        if (!empty($category) && $category != -1) {
             $where['category'] = $category;
         }
 
@@ -101,12 +101,12 @@ class Template extends Admin_Controller
             }
 
             if (empty($data['error'])) {
+                $post['category'] = $cid;
                 if ($id) {
                     $post['update_time'] = time();
                     $this->template_model->update($post, array('id' => $id));
                 } else {
                     $post['create_time'] = $post['update_time'] = time();
-                    $post['category'] = $cid;
                     $data['template']['id'] = $this->template_model->insert($post);
                 }
 
