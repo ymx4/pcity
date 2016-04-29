@@ -13,9 +13,9 @@ class Wx extends Base_Controller {
     {
         switch ($redirect_type) {
             case 1:
-            
+
             default:
-                echo '绑定成功！';
+                redirect('announcement');
                 break;
         }
         exit;

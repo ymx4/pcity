@@ -40,7 +40,7 @@
                             <tr>
                                 <td><img width="100px" src="<?php echo $row['headimgurl'];?>"></td>
                                 <td><?php echo $row['nickname']; ?></td>
-                                <td><?php echo $row['create_time']; ?></td>
+                                <td><?php echo date('Y-m-d H:i:s', $row['create_time']); ?></td>
                                 <td>
                                     <a href="/admin/group/join/<?php echo $row['id'];?>">加入分组</a>
                                 </td>
