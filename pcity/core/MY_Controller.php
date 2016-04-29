@@ -110,9 +110,6 @@ class Wx_Controller extends Base_Controller
         parent::__construct();
         //load libraries
         $this->load->library(array('session','weixin','user_lib'));
-        $this->session->set_userdata(array(
-            'user_auth' => array('id' => 1, 'nickname' => 'Hypnos'),
-        ));//TODO
         $this->wxlogin();
     }
 
