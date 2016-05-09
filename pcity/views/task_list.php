@@ -117,10 +117,10 @@ $('.addtask').click(function(){
     $.post("/task/add/" + page, {title: $('#addtt').val(), content: $('#addtc').val()}, function(data){
         var rr = $.parseJSON(data);
         if (rr.code) {
-          if (value.title == '') {
-            var tmptitle = value.content;
+          if (rr.data.title == '') {
+            var tmptitle = rr.data.content;
           } else {
-            var tmptitle = value.title;
+            var tmptitle = rr.data.title;
           }
           $('.am-gao').prepend('<li><a href="#" type="button" onclick="t_detail(\'' + rr.data.title + '\', \'' + rr.data.content + '\');" class="am-btn am-btn-primary" data-am-modal="{target: \'#doc-modal-1\', closeViaDimmer: 0, width: 400, height: 225}">'
             + tmptitle + '<span>' + rr.data.create_time + '</span>'

@@ -7,8 +7,13 @@ class Base_Controller extends CI_Controller
 {
     protected static $group_role = array(
         1 => '业主',
-        2 => '施工方',
-        3 => '甲方',
+        2 => '施工单位',
+        3 => '监理单位',
+        4 => '建设单位',
+    );
+    protected static $auth_list = array(
+        'admin' => '管理员',
+        'task/add' => '发布任务',
     );
     protected static $announcement_type = array(
         1 => '公司文件',
@@ -111,6 +116,7 @@ class Wx_Controller extends Base_Controller
         //load libraries
         $this->load->library(array('session','weixin','user_lib'));
         $this->wxlogin();
+        $this->checkAuth();
     }
 
     public function wxlogin()
@@ -144,6 +150,15 @@ class Wx_Controller extends Base_Controller
     public function head_title($title)
     {
         $this->title = $title;
+    }
+
+    private function checkAuth()
+    {
+        $auth = $this->user_lib->get_current_user('auth');
+        $pageAuth = $this->router->class . '/' . $this->router->method;
+        if (in_array($pageAuth, array_keys(self::$auth_list)) && (!$auth || (!in_array($pageAuth, $auth) && !in_array('admin', $auth)))) {
+            show_error('无权限');
+        }
     }
 }
 

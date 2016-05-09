@@ -10,11 +10,11 @@
     <div class="col-md-4">
         <form>
             <div class="form-group">
-                <label>样板分类</label>
+                <label>样板类型</label>
                 <select class="form-control" id="templatecat" name="category">
-                    <option value="-1" selected="selected">所有</option>
+                    <option value="-1">所有</option>
                     <?php foreach ($categories as $cid => $row) : ?>
-                        <option value="<?php echo $cid; ?>"><?php echo $row['name']; ?></option>
+                        <option value="<?php echo $cid; ?>"<?php if ($cid == $category) echo ' selected="selected"'; ?>><?php echo $row['name']; ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -65,7 +65,7 @@
     {
         var cid = $('#templatecat').val();
         if (cid == -1) {
-            alert ('请选择样板分类');
+            alert ('请选择样板类型');
         } else {
             if (confirm('确定要添加' + $("#templatecat").find("option:selected").text() + '吗？')) {
                 location.href = '/admin/template/edit/' + cid;

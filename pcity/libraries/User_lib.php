@@ -24,6 +24,7 @@ class User_lib
     {
         $user = $this->CI->weixin_model->get_user_by_openid($openid);
         if (!empty($user) && !empty($user['nickname'])) {
+            $user['auth'] = $this->get_user_auth($user['id']);
             $this->CI->session->set_userdata(array(
                 'user_auth' => $user
             ));
@@ -36,10 +37,21 @@ class User_lib
     public function update_user($userinfo)
     {
         $user = $this->CI->weixin_model->update_user($userinfo);
+        $user['auth'] = $this->get_user_auth($user['id']);
         $this->CI->session->set_userdata(array(
             'user_auth' => $user
         ));
         return $user;
+    }
+
+    public function get_user_auth($uid)
+    {
+        $this->CI->load->model('user_auth_model');
+        $auth = $this->CI->user_auth_model->find($uid, 'user_id');
+        if (!empty($auth) && !empty($auth['auth'])) {
+            return json_decode($auth['auth'], true);
+        }
+        return false;
     }
 
     public function logout()

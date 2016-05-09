@@ -7,6 +7,22 @@
     <!-- /.col-md-12 -->
 </div>
 <div class="row">
+    <div class="col-md-4">
+        <form>
+            <div class="form-group">
+                <label>公告类型</label>
+                <select class="form-control" id="anntype" name="type">
+                    <option value="-1">所有</option>
+                    <?php foreach ($announcement_type_list as $tid => $tname) : ?>
+                        <option value="<?php echo $tid; ?>"<?php if ($tid == $ptype) echo ' selected="selected"'; ?>><?php echo $tname; ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-default" value="搜索" />
+            </div>
+        </form>
+    </div>
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">

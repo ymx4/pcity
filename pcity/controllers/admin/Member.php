@@ -39,4 +39,57 @@ class Member extends Admin_Controller
 
         $this->load->view('admin/member_list', $data);
     }
+
+    public function auth($user_id)
+    {
+        $data = array(
+            'auth_list' => self::$auth_list,
+            'status' => 0,
+            'auth' => array(),
+        );
+        $this->load->model('user_auth_model');
+
+        $member = $this->weixin_model->find($user_id);
+        if (empty($member)) {
+            show_error('用户不存在');
+        }
+        $data['nickname'] = $member['nickname'];
+
+        $authrow = $this->user_auth_model->find($user_id, 'user_id');
+        if (!empty($authrow) && !empty($authrow['auth'])) {
+            $data['auth'] = json_decode($authrow['auth'], true);
+        }
+        $post = $this->input->post();
+        if (!empty($post)) {
+            if (!empty($post['auth'])) {
+                $data['auth'] = $post['auth'];
+                $auth_ids = array_keys(self::$auth_list);
+                foreach ($post['auth'] as $value) {
+                    if (!in_array($value, $auth_ids)) {
+                        $data['error'] = '权限选择出错';
+                        break;
+                    }
+                }
+                $post['auth'] = json_encode($post['auth']);
+            } else {
+                $data['auth'] = array();
+                $post['auth'] = '';
+            }
+
+            if (empty($data['error'])) {
+                if (empty($authrow)) {
+                    $this->user_auth_model->insert(array(
+                        'user_id' => $user_id,
+                        'auth' => $post['auth'],
+                    ));
+                } else {
+                    $this->user_auth_model->update(array(
+                        'auth' => $post['auth'],
+                    ), array('user_id' => $user_id));
+                }
+                $data['status'] = 1;
+            }
+        }
+        $this->load->view('admin/user_auth', $data);
+    }
 }

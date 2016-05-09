@@ -7,11 +7,10 @@
     </div>
     <!-- /.col-md-12 -->
 </div>
-<?php $i = 0; ?>
 <?php foreach ($roles as $role => $role_title) : ?>
     <?php if (!empty($group_role[$role])) : ?>
-        <?php $i++; if ($i % 2 == 1) echo '<div class="row">'; ?>
-            <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <?php echo $role_title; ?>
@@ -45,7 +44,7 @@
                 </div>
                 <!-- /.panel -->
             </div>
-        <?php if ($i % 2 == 1) echo '</div>'; ?>
+        </div>
     <?php endif; ?>
 <?php endforeach; ?>
 <script type="text/javascript">

@@ -16,14 +16,21 @@ class Announcement extends Admin_Controller
     public function index()
     {
         $offset = intval($this->input->get('o'));
+        $type = $this->input->get('type');
         $data   = array(
             'announcement_list' => array(),
+            'announcement_type_list' => self::$announcement_type,
+            'ptype' => $type,
         );
+        $where = array();
+        if (!empty($type) && $type != -1) {
+            $where['type'] = $type;
+        }
 
-        $count = $this->announcement_model->get_count(array());
+        $count = $this->announcement_model->get_count($where);
         if ($count) {
             $limit = $this->config->item('page_size');
-            $data['announcement_list'] = $this->announcement_model->get_list(array(), $limit, $offset);
+            $data['announcement_list'] = $this->announcement_model->get_list($where, $limit, $offset);
 
             $this->load->library('pagination');
 
@@ -46,6 +53,7 @@ class Announcement extends Admin_Controller
                 'title' => '',
                 'content' => '',
             ),
+            'announcement_type_list' => self::$announcement_type,
             'status' => 0,
         );
 
@@ -64,6 +72,9 @@ class Announcement extends Admin_Controller
             if (empty($post['title'])) {
                 $data['error'] = '请填写标题';
             }
+            if (empty($post['type']) || $post['type'] == -1) {
+                $data['error'] = '请选择公告类型';
+            }
 
             // if (empty($post['content'])) {
             //     $data['error'] = '请填写内容';
@@ -73,6 +84,9 @@ class Announcement extends Admin_Controller
                 if ($_FILES['up_file']['error'] != 4) {
                     $this->load->library('upload');
 
+                    if (!is_dir(FCPATH . $this->config->item('announcement_file_path'))) {
+                        mkdir(FCPATH . $this->config->item('announcement_file_path'), 0755, true);
+                    }
                     $upConfig = array(
                         'upload_path'   => FCPATH . $this->config->item('announcement_file_path'),
                         'allowed_types' => 'doc|docx|pdf|jpg|jpeg|png',

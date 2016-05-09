@@ -15,7 +15,7 @@ var page = 1;
 var sstop = false;
 var aq = '';
 function nextpage() {
-  $.post("/announcement/getlist/" + page, {q: aq}, function(data){
+  $.post("/announcement/getlist/" + page + '/<?php echo $type; ?>', {q: aq}, function(data){
       var rr = $.parseJSON(data);
       if (rr.code && rr.data && rr.data.length > 0) {
         if (page == 1) $('.am-li').empty();

@@ -43,6 +43,7 @@
                                 <td><?php echo date('Y-m-d H:i:s', $row['create_time']); ?></td>
                                 <td>
                                     <a href="/admin/group/join/<?php echo $row['id'];?>">加入分组</a>
+                                    <a href="/admin/member/auth/<?php echo $row['id'];?>">修改权限</a>
                                 </td>
                             </tr>
                             <?php endforeach;?>

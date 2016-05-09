@@ -16,12 +16,13 @@ class Template extends Admin_Controller
     public function index()
     {
         $offset = intval($this->input->get('o'));
+        $category = $this->input->get('category');
         $data   = array(
             'template_list' => array(),
             'categories' => self::$template_categories,
+            'category' => $category,
         );
         $where = array('title <>' => '');
-        $category = $this->input->get('category');
         if (!empty($category) && $category != -1) {
             $where['category'] = $category;
         }
@@ -134,6 +135,9 @@ class Template extends Admin_Controller
         }
 
         $this->load->library('upload');
+        if (!is_dir(FCPATH . $this->config->item('template_image_path'))) {
+            mkdir(FCPATH . $this->config->item('template_image_path'), 0755, true);
+        }
 
         $upConfig = array(
             'file_name'     => time(),

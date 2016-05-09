@@ -19,6 +19,15 @@
                             <input class="form-control" type="text" name="title" value="<?php if (!empty($announcement['title'])) echo $announcement['title'];?>">
                         </div>
                         <div class="form-group">
+                            <label>公告类型</label>
+                            <select class="form-control" id="anntype" name="type">
+                                <option value="-1">所有</option>
+                                <?php foreach ($announcement_type_list as $tid => $tname) : ?>
+                                    <option value="<?php echo $tid; ?>"<?php if (isset($announcement['type']) && $tid == $announcement['type']) echo ' selected="selected"'; ?>><?php echo $tname; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label>上传</label>
                             <?php if (!empty($announcement_file)) echo sprintf('<a href="%s">%s</a>', $announcement_file, $announcement['file_name']); ?>
                             <input type="file" name="up_file">
