@@ -15,8 +15,8 @@ class Wx extends CI_Controller
         $menu = array(
             'button' => array(array(
                 'type' => 'view',
-                'name' => '开发中',
-                'url' => 'http://www.pcity.cc',
+                'name' => '公告',
+                'url' => 'http://www.pcity.cc/announcement?wx=1',
             ))
         );
         if ($this->weixin->create_menu($menu)) {

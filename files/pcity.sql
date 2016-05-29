@@ -35,6 +35,7 @@ DROP TABLE IF EXISTS `announcement`;
 CREATE TABLE `announcement` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(64) NOT NULL DEFAULT '',
+  `type` tinyint(1) unsigned NOT NULL DEFAULT '3',
   `file_name` varchar(64) NOT NULL DEFAULT '',
   `content` varchar(1000) DEFAULT '',
   `create_time` int(11) unsigned DEFAULT '0',
@@ -54,9 +55,11 @@ CREATE TABLE `group` (
   `create_time` int(11) unsigned DEFAULT '0',
   `update_time` int(11) unsigned DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 /*Data for the table `group` */
+
+insert  into `group`(`id`,`title`,`create_time`,`update_time`) values (4,'房间1-1',1463289228,1463289228);
 
 /*Table structure for table `group_role` */
 
@@ -71,6 +74,8 @@ CREATE TABLE `group_role` (
 
 /*Data for the table `group_role` */
 
+insert  into `group_role`(`group_id`,`user_id`,`role`) values (4,1,1),(4,2,2),(4,4,3),(4,3,4);
+
 /*Table structure for table `task` */
 
 DROP TABLE IF EXISTS `task`;
@@ -82,9 +87,11 @@ CREATE TABLE `task` (
   `create_time` int(11) unsigned DEFAULT '0',
   `update_time` int(11) unsigned DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 /*Data for the table `task` */
+
+insert  into `task`(`id`,`title`,`content`,`create_time`,`update_time`) values (1,'a','aaaa',1461594504,1461594504),(2,'bb','bbbbbbbb',1461594515,1461594515),(3,'','cccccccccccccccccccccccccccccccccccc',1461594574,1461594574),(4,'ddddddddddddddddddddddddddddddddddddddddddddddddddd','dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd',1461594595,1461594595);
 
 /*Table structure for table `template` */
 
@@ -111,9 +118,23 @@ CREATE TABLE `template` (
   `create_time` int(11) unsigned DEFAULT '0',
   `update_time` int(11) unsigned DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 /*Data for the table `template` */
+
+insert  into `template`(`id`,`title`,`category`,`image`,`process_requirement`,`acceptance_criteria`,`manage_level`,`location`,`disclosure_criteria`,`materiel_name`,`materiel_mfr`,`materiel_specificatio`,`materiel_range`,`host`,`disclosure`,`attendee`,`adjustment`,`create_time`,`update_time`) values (1,'aaa',1,'[\"1461933760.jpg\"]','aaa','aaa','aaa','aaa','','','','','','','','','',0,1461933762),(2,'bbbbbbbb',1,'[\"1461933971.jpg\"]','bbbbbbbb','bbbbbbbb','bbbbbbbb','bbbbbbbb','','','','','','','','','',0,1461933973),(3,'cccccccccc',1,'','cccccccccc','cccccccccc','cccccccccc','cccccccccc','','','','','','','','','',1461934119,1461934119),(4,'ddddddddddddd',2,'[\"1461934146.jpg\"]','ddddddddddddd','ddddddddddddd','ddddddddddddd','ddddddddddddd','','','','','','','','','',0,1461934149),(5,'eeeeeeee',1,'[\"1461934182.jpg\"]','eeeeeeee','eeeeeeee','eeeeeeee','eeeeeeee','','','','','','','','','',0,1461934504);
+
+/*Table structure for table `user_auth` */
+
+DROP TABLE IF EXISTS `user_auth`;
+
+CREATE TABLE `user_auth` (
+  `user_id` int(11) unsigned NOT NULL,
+  `auth` varchar(200) NOT NULL DEFAULT '',
+  PRIMARY KEY (`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+/*Data for the table `user_auth` */
 
 /*Table structure for table `wx_data_store` */
 
