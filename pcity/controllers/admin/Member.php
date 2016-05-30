@@ -40,20 +40,21 @@ class Member extends Admin_Controller
         $this->load->view('admin/member_list', $data);
     }
 
-    public function auth($user_id)
+    public function edit($user_id)
     {
+        $this->load->model(array('company_model', 'user_auth_model'));
         $data = array(
             'auth_list' => self::$auth_list,
             'status' => 0,
+            'company_list' => $this->company_model->get_list(),
             'auth' => array(),
         );
-        $this->load->model('user_auth_model');
 
         $member = $this->weixin_model->find($user_id);
         if (empty($member)) {
             show_error('用户不存在');
         }
-        $data['nickname'] = $member['nickname'];
+        $data['member'] = $member;
 
         $authrow = $this->user_auth_model->find($user_id, 'user_id');
         if (!empty($authrow) && !empty($authrow['auth'])) {
@@ -76,6 +77,16 @@ class Member extends Admin_Controller
                 $post['auth'] = '';
             }
 
+            if (!empty($post['company_id'])) {
+                $exist = $this->company_model->find($post['company_id']);
+                if (empty($exist)) {
+                    $data['error'] = '所属公司选择出错';
+                }
+            } else {
+                $post['company_id'] = 0;
+            }
+            $data['member']['company_id'] = $post['company_id'];
+
             if (empty($data['error'])) {
                 if (empty($authrow)) {
                     $this->user_auth_model->insert(array(
@@ -87,9 +98,12 @@ class Member extends Admin_Controller
                         'auth' => $post['auth'],
                     ), array('user_id' => $user_id));
                 }
+                $this->weixin_model->update(array(
+                    'company_id' => $post['company_id'],
+                ), array('id' => $user_id));
                 $data['status'] = 1;
             }
         }
-        $this->load->view('admin/user_auth', $data);
+        $this->load->view('admin/member', $data);
     }
 }

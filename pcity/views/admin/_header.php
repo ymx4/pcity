@@ -87,6 +87,11 @@
 		                </li>
 		            </ul>
 		            <ul class="nav" id="side-menu">
+		                <li<?php echo ($tab == 'company') ? ' class="active"' : '';?>>
+		                    <a href="/admin/company"><i class="fa fa-edit fa-fw"></i> 公司</a>
+		                </li>
+		            </ul>
+		            <ul class="nav" id="side-menu">
 		                <li<?php echo ($tab == 'template') ? ' class="active"' : '';?>>
 		                    <a href="/admin/template"><i class="fa fa-edit fa-fw"></i> 样板库</a>
 		                </li>
@@ -94,11 +99,6 @@
 		            <ul class="nav" id="side-menu">
 		                <li<?php echo ($tab == 'member') ? ' class="active"' : '';?>>
 		                    <a href="/admin/member"><i class="fa fa-edit fa-fw"></i> 用户管理</a>
-		                </li>
-		            </ul>
-		            <ul class="nav" id="side-menu">
-		                <li<?php echo ($tab == 'group') ? ' class="active"' : '';?>>
-		                    <a href="/admin/group"><i class="fa fa-edit fa-fw"></i> 分组管理</a>
 		                </li>
 		            </ul>
 		        </div>

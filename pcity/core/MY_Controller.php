@@ -5,6 +5,11 @@
  */
 class Base_Controller extends CI_Controller
 {
+    protected static $company_type = array(
+        1 => '施工单位',
+        2 => '监理单位',
+        3 => '建设单位',
+    );
     protected static $group_role = array(
         1 => '业主',
         2 => '施工单位',
@@ -33,7 +38,7 @@ class Base_Controller extends CI_Controller
         'host' => '主持人',
         'disclosure' => '交底内容',
         'attendee' => '参加人员',
-        'adjustment' => '',
+        'adjustment' => '调整内容',
     );
     protected static $template_categories = array(
         1 => array(

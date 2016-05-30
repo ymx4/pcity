@@ -25,6 +25,13 @@ class User_lib
         $user = $this->CI->weixin_model->get_user_by_openid($openid);
         if (!empty($user) && !empty($user['nickname'])) {
             $user['auth'] = $this->get_user_auth($user['id']);
+            if (!empty($user['company_id'])) {
+                $this->CI->load->model('company_model');
+                $company = $this->CI->company_model->find($user['company_id']);
+                $user['role'] = $company['type'];
+            } else {
+                $user['role'] = 0;
+            }
             $this->CI->session->set_userdata(array(
                 'user_auth' => $user
             ));

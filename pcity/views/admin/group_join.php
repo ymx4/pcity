@@ -22,6 +22,7 @@
                             <label>分组</label>
                             <input type="text" name="group" value="<?php echo $group; ?>" />
                         </div>
+                        <div class="form-group">
                             <select class="form-control" name="role">
                                 <?php foreach ($roles as $k => $v) : ?>
                                     <option value="<?php echo $k; ?>"><?php echo $v; ?></option>
