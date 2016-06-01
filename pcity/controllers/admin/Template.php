@@ -156,6 +156,8 @@ class Template extends Admin_Controller
             if (empty($template)) {
                 $id = $this->template_model->insert(array(
                     'image' => json_encode(array($imagedata['file_name'])),
+                    'create_time' => time(),
+                    'update_time' => time(),
                 ));
             } else {
                 if (empty($template['image'])) {
@@ -166,6 +168,7 @@ class Template extends Admin_Controller
                 $template_image[] = $imagedata['file_name'];
                 $this->template_model->update(array(
                     'image' => json_encode($template_image),
+                    'update_time' => time(),
                 ), array('id' => $template['id']));
                 $id = $template['id'];
             }
@@ -190,7 +193,10 @@ class Template extends Admin_Controller
             if ($key !== false) {
                 unlink(FCPATH . $this->config->item('template_image_path') . $imgname);
                 unset($imglist[$key]);
-                $this->template_model->update(array('image' => json_encode($imglist)), array('id' => $id));
+                $this->template_model->update(array(
+                    'image' => json_encode($imglist),
+                    'update_time' => time(),
+                ), array('id' => $id));
             }
         }
         $this->response();
