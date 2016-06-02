@@ -5,206 +5,37 @@
   
   <ul class="am-tabs-nav am-nav am-nav-tabs" style="border-top:solid 1px #cccccc;">
     <?php if ($_user['role'] == 1) : ?>
-    <li class="am-active" style="width:50%">
+    <li class="am-active" onclick="asearch(0)" style="width:50%">
       <a href="#tab1">施工单位</a>
     </li>
     <?php endif; ?>
     <?php if ($_user['role'] == 2) : ?>
-    <li class="am-active" style="width:50%">
-      <a href="#tab2">监理单位</a>
+    <li class="am-active" onclick="asearch(0)" style="width:50%">
+      <a href="#tab1">监理单位</a>
     </li>
     <?php endif; ?>
     <?php if ($_user['role'] == 3) : ?>
-    <li class="am-active" style="width:50%">
-      <a href="#tab3">建设单位</a>
+    <li class="am-active" onclick="asearch(0)" style="width:50%">
+      <a href="#tab1">建设单位</a>
     </li>
     <?php endif; ?>
-    <li class="" style="width:50%">
-      <a href="#tab4">验收完成</a>
+    <li class="" onclick="asearch(1)" style="width:50%">
+      <a href="#tab2">验收完成</a>
     </li>
   </ul>
   <div class="am-tabs-bd" >
     <div class="am-tab-panel am-fade am-active am-in" id="tab1">
-      <ul>
+      <ul id="list-m">
+        <?php if ($_user['role'] == 1) : ?>
         <li>
           <div class="title-video" style="background:none;">
-          <a href="物料-施工单位-报验.html" class="bth-jia">添加</a>
+          <a href="/materiel/edit" class="bth-jia">添加</a>
           </div>
         </li>
-        <li>
-          <div class="title-video">
-            <a href="物料管理-施工单位查看.html" class="table">
-              <table width="100%">
-                <tr>
-                  <td style=" font-size: 1.2em;padding: 0.2em 0em 0.2em;border-bottom: solid 1px #ccc;border-bottom: solid 1px #ccc;line-height:2em">
-                    3-2-2102防水第一次验收
-                  </td>
-                </tr>
-                <tr>
-                  <td style=" line-height:2em;font-size: 1.2em;padding: 0.2em 0em 0em;">
-                    2016-4-5 PM3:00
-                  </td>
-                </tr>
-                <tr>
-                  <td style=" line-height:2em;font-size: 1.2em;padding: 0.2em 0em 0em;border-top: solid 1px #ccc;">
-                    <div style="color:#18b6bf;">监理单位查看中</div>
-                  </td>
-                </tr>
-              </table>
-            </a>
-          </div>
-        </li>
+        <?php endif; ?>
       </ul>
     </div>
     <div class="am-tab-panel am-fade" id="tab2">
-      <ul>
-        <li>
-          <div class="title-video">
-            <a href="物料-监理单位验收.html" class="table">
-            <table width="100%">
-              <tr>
-                <td style=" font-size: 1.2em;padding: 0.2em 0em 0.2em;border-bottom: solid 1px #ccc;border-bottom: solid 1px #ccc;line-height:2em">
-                  3-2-2102防水第一次验收
-                </td>
-              </tr>
-              <tr>
-                <td style=" line-height:2em;font-size: 1.2em;padding: 0.2em 0em 0em;">
-                  2016-4-5 PM3:00
-                </td>
-              </tr>
-              <tr>
-                <td style=" line-height:2em;font-size: 1.2em;padding: 0.2em 0em 0em;border-top: solid 1px #ccc;">
-                  <div style="color:#18b6bf;">什么事自检合格请你是谁给予验收</div>
-                </td>
-              </tr>
-            </table>
-            </a>
-          </div>
-        </li>
-        <li>
-          <div class="title-video">
-          <a href="监理单位验收.html" class="table">
-          <table width="100%">
-            <tr>
-              <td style=" font-size: 1.2em;padding: 0.2em 0em 0.2em;border-bottom: solid 1px #ccc;border-bottom: solid 1px #ccc;line-height:2em">
-                3-2-2102防水第一次验收
-              </td>
-            </tr>
-            <tr>
-              <td style=" line-height:2em;font-size: 1.2em;padding: 0.2em 0em 0em;">
-                2016-4-5 PM3:00
-              </td>
-            </tr>
-            <tr>
-              <td style=" line-height:2em;font-size: 1.2em;padding: 0.2em 0em 0em;border-top: solid 1px #ccc;">
-                <div style="color:#18b6bf;">什么事自检合格请你是谁给予验收</div>
-              </td>
-            </tr>
-          </table>
-          </a>
-          </div>
-        </li>
-        <li>
-          <div class="title-video">
-          <a href="监理单位验收.html" class="table">
-          <table width="100%">
-            <tr>
-              <td style=" font-size: 1.2em;padding: 0.2em 0em 0.2em;border-bottom: solid 1px #ccc;border-bottom: solid 1px #ccc;line-height:2em">
-                3-2-2102防水第一次验收
-              </td>
-            </tr>
-            <tr>
-              <td style=" line-height:2em;font-size: 1.2em;padding: 0.2em 0em 0em;">
-                2016-4-5 PM3:00
-              </td>
-            </tr>
-            <tr>
-              <td style=" line-height:2em;font-size: 1.2em;padding: 0.2em 0em 0em;border-top: solid 1px #ccc;">
-                <div style="color:#18b6bf;">什么事自检合格请你是谁给予验收</div>
-              </td>
-            </tr>
-          </table>
-          </a>
-          </div>
-        </li>
-        <div class="wei"></div>
-      </ul>
-    </div>
-    <div class="am-tab-panel am-fade" id="tab3">
-      <ul>
-        <li>
-          <div class="title-video">
-          <a href="物料-建设单位验收.html" class="table">
-          <table width="100%">
-            <tr>
-              <td style=" font-size: 1.2em;padding: 0.2em 0em 0.2em;border-bottom: solid 1px #ccc;border-bottom: solid 1px #ccc;line-height:2em">
-                3-2-2102防水第一次验收
-              </td>
-            </tr>
-            <tr>
-              <td style=" line-height:2em;font-size: 1.2em;padding: 0.2em 0em 0em;">
-                2016-4-5 PM3:00
-              </td>
-            </tr>
-            <tr>
-              <td style=" line-height:2em;font-size: 1.2em;padding: 0.2em 0em 0em;border-top: solid 1px #ccc;">
-                <div style="color:#18b6bf;">什么事自检合格请你是谁给予验收</div>
-              </td>
-            </tr>
-          </table>
-          </a>
-          </div>
-        </li>
-        <li>
-          <div class="title-video">
-          <a href="物料-建设单位验收.html" class="table">
-          <table width="100%">
-            <tr>
-              <td style=" font-size: 1.2em;padding: 0.2em 0em 0.2em;border-bottom: solid 1px #ccc;border-bottom: solid 1px #ccc;line-height:2em">
-                3-2-2102防水第一次验收
-              </td>
-            </tr>
-            <tr>
-              <td style=" line-height:2em;font-size: 1.2em;padding: 0.2em 0em 0em;">
-                2016-4-5 PM3:00
-              </td>
-            </tr>
-            <tr>
-              <td style=" line-height:2em;font-size: 1.2em;padding: 0.2em 0em 0em;border-top: solid 1px #ccc;">
-                <div style="color:#18b6bf;">什么事自检合格请你是谁给予验收</div>
-              </td>
-            </tr>
-          </table>
-          </a>
-          </div>
-        </li>
-        <li>
-          <div class="title-video">
-          <a href="物料-建设单位验收.html" class="table">
-          <table width="100%">
-            <tr>
-              <td style=" font-size: 1.2em;padding: 0.2em 0em 0.2em;border-bottom: solid 1px #ccc;border-bottom: solid 1px #ccc;line-height:2em">
-                3-2-2102防水第一次验收
-              </td>
-            </tr>
-            <tr>
-              <td style=" line-height:2em;font-size: 1.2em;padding: 0.2em 0em 0em;">
-                2016-4-5 PM3:00
-              </td>
-            </tr>
-            <tr>
-              <td style=" line-height:2em;font-size: 1.2em;padding: 0.2em 0em 0em;border-top: solid 1px #ccc;">
-                <div style="color:#18b6bf;">什么事自检合格请你是谁给予验收</div>
-              </td>
-            </tr>
-          </table>
-          </a>
-          </div>
-        </li>
-        <div class="wei"></div>
-      </ul>
-    </div>
-    <div class="am-tab-panel am-fade" id="tab4">
       <ul>
         <li>
           <div class="title-video">
@@ -363,22 +194,25 @@
 
 <script>
 var page = 1;
+var comp = 0;
 var sstop = false;
 var aq = '';
 function nextpage() {
-  $.post("/task/getlist/" + page, {q: aq}, function(data){
+  $.post("/materiel/getlist/" + page, {comp: comp}, function(data){
       var rr = $.parseJSON(data);
       if (rr.code && rr.data && rr.data.length > 0) {
-        if (page == 1) $('.am-gao').empty();
+        if (page == 1) $('#list-m li.li-m').remove();
         $.each(rr.data,function(n, value) {
-          if (value.title == '') {
-            var tmptitle = value.content;
-          } else {
-            var tmptitle = value.title;
-          }
-          $('.am-gao').append('<li><a href="#" type="button" onclick="t_detail(\'' + value.title + '\', \'' + value.content + '\');" class="am-btn am-btn-primary" data-am-modal="{target: \'#doc-modal-1\', closeViaDimmer: 0, width: 400, height: 225}">'
-            + tmptitle + '<span>' + value.create_time + '</span>'
-            + '</a><div class="clearfloat"></div></li>'
+          $('#list-m').append('<li><div class="title-video"><a href="' + value.url + '" class="table">'
+            + '<table width="100%">'
+            + '<tr><td style=" font-size: 1.2em;padding: 0.2em 0em 0.2em;border-bottom: solid 1px #ccc;border-bottom: solid 1px #ccc;line-height:2em">'
+            + value.title
+            + '</td></tr><tr><td style=" line-height:2em;font-size: 1.2em;padding: 0.2em 0em 0em;">'
+            + value.create_time
+            + '</td></tr><tr><td style=" line-height:2em;font-size: 1.2em;padding: 0.2em 0em 0em;border-top: solid 1px #ccc;">'
+            + '<div style="color:#18b6bf;">'
+            + value.desc
+            + '</div></td></tr></table></a></div></li>'
           );
         });
         if (rr.stop) {
@@ -389,10 +223,11 @@ function nextpage() {
   });
 }
 
-function asearch()
+function asearch(tcomp)
 {
   page = 1;
-  aq = $('#aq').val();
+  comp = tcomp;
+  aq = '';//$('#aq').val();
   nextpage();
 }
 

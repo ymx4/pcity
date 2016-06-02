@@ -1,33 +1,7 @@
-<!doctype html>
-<html class="no-js">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>监理</title>
-  <!-- Set render engine for 360 browser -->
-  <meta name="renderer" content="webkit">
+<?php include('_header_no_nav.php'); ?>
 
-  <!-- No Baidu Siteapp-->
-  <meta http-equiv="Cache-Control" content="no-siteapp"/>
-
-  <!-- Add to homescreen for Chrome on Android -->
-  <meta name="mobile-web-app-capable" content="yes">
-
-  <!-- Add to homescreen for Safari on iOS -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
-  <!-- Tile icon for Win8 (144x144 + tile color) -->
-  <meta name="msapplication-TileColor" content="#0e90d2">
-  <link rel="stylesheet" href="css/amazeui.min.css">
-  <link rel="stylesheet" href="css/app.css">
-  <link rel="stylesheet" href="css/style.css">
-  <script src="js/jquery-1.8.3.min.js"></script>
-  <script>
-  $(function(){
+<script>
+$(function(){
   $(".select").each(function(){
     var s=$(this);
     var z=parseInt(s.css("z-index"));
@@ -40,14 +14,11 @@
     $("body").click(function(i){ !$(i.target).parents(".select").first().is(s) ? _hide():"";});
   })
 })  
-  </script>   
-
-</head>
-<body>
+</script>
 
 <!--在这里编写你的代码-->
 <header class="bar bar-nav">
-  <h1 class="navbar-title navbar-center"><a href="物料管理.html"><img class="am-home" src="images/home.jpg"></a>物料报验</h1>
+  <h1 class="navbar-title navbar-center"><a href="物料管理.html"><img class="am-home" src="/assets/wx/images/home.jpg"></a>物料报验</h1>
 </header> 
 <div class="wei" style="height:4.5rem"></div>
 
@@ -81,7 +52,7 @@
     </tr>
     <tr>
       <td colspan="2">
-      <img src="images/jia1.jpg" alt="">
+      <img src="/assets/wx/images/jia1.jpg" alt="">
       </td>
     </tr>
     <tr>
@@ -129,15 +100,4 @@
     <a href="物料管理.html"><input type="button" class="am-btn am-btn-primary btn-loading-example" value="提交" style="width:97%"/></a>
 
 </figure>
-
-<!--[if (gte IE 9)|!(IE)]><!-->
-<script src="js/jquery.min.js"></script>
-<!--<![endif]-->
-<!--[if lte IE 8 ]>
-<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
-<![endif]-->
-<script src="js/amazeui.min.js"></script>
-</body>
-</html>
+<?php include('_footer.php'); ?>
