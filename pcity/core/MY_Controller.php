@@ -114,6 +114,7 @@ class Wx_Controller extends Base_Controller
 {
     private $title = '孔雀城';
     private $state = '99a0e32d0d214d53984b13a24ad9df12';
+    public $_user = null;
 
     public function __construct()
     {
@@ -121,6 +122,7 @@ class Wx_Controller extends Base_Controller
         //load libraries
         $this->load->library(array('session','weixin','user_lib'));
         $this->wxlogin();
+        $this->_user = $this->user_lib->get_current_user();
         $this->checkAuth();
     }
 
@@ -159,7 +161,7 @@ class Wx_Controller extends Base_Controller
 
     private function checkAuth()
     {
-        $auth = $this->user_lib->get_current_user('auth');
+        $auth = $this->_user['auth'];
         $pageAuth = $this->router->class . '/' . $this->router->method;
         if (in_array($pageAuth, array_keys(self::$auth_list)) && (!$auth || (!in_array($pageAuth, $auth) && !in_array('admin', $auth)))) {
             show_error('无权限');
