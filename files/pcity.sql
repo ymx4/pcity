@@ -103,7 +103,7 @@ CREATE TABLE `materiel` (
   `position` varchar(1000) NOT NULL DEFAULT '',
   `constructor_image` varchar(1000) NOT NULL DEFAULT '',
   `supervisor_image` varchar(1000) NOT NULL DEFAULT '',
-  `quantity` int(11) unsigned DEFAULT '0',
+  `quantity` varchar(32) DEFAULT '',
   `constructor_id` int(11) unsigned DEFAULT '0',
   `supervisor_id` int(11) unsigned DEFAULT '0',
   `builder_id` int(11) unsigned DEFAULT '0',
@@ -113,9 +113,11 @@ CREATE TABLE `materiel` (
   `create_time` int(11) unsigned DEFAULT '0',
   `update_time` int(11) unsigned DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 /*Data for the table `materiel` */
+
+insert  into `materiel`(`id`,`title`,`position`,`constructor_image`,`supervisor_image`,`quantity`,`constructor_id`,`supervisor_id`,`builder_id`,`supervisor_check`,`builder_check`,`status`,`create_time`,`update_time`) values (1,'test','test','1-1-1465287990.gif','','test',1,2,0,0,0,0,1465287168,1465287990);
 
 /*Table structure for table `task` */
 
@@ -219,7 +221,7 @@ CREATE TABLE `wx_user` (
 
 /*Data for the table `wx_user` */
 
-insert  into `wx_user`(`id`,`openid`,`nickname`,`sex`,`city`,`country`,`province`,`language`,`headimgurl`,`create_time`,`update_time`,`company_id`) values (1,'oGh9uwZ3H0v9l993Ozy3kv3hRqe0','Hypnos',1,'苏州','中国','江苏','zh_CN','http://wx.qlogo.cn/mmopen/Q3auHgzwzM6dIVaJAM9sZZYuzicvTOdDyHWLyI2YE31VomQayJlI5GdApyUBsuc3TickJLq9FzGklz0LcMAr4BoSDCDHiaIjTxqelTdydYwqZ8/0',1461224490,1461224500,1),(2,'oGh9uweuonaX9YNwGpo55z9Ol3AM','流云飞扬',1,'苏州','中国','江苏','zh_CN','http://wx.qlogo.cn/mmopen/LCWtHyvj1E2Fiav7N72j907iblqeVH64TNO8MZ4ekCicZkvYicVMsbNLFXmKxoCM9Ngq4VPSAbX3qHKsVEibOKSCLQHUqeUtSmJZk/0',1461224978,1461224978,0),(3,'oGh9uwaQn8GdJQAHdv6nADfrCUkw','KAME',1,'苏州','中国','江苏','zh_CN','http://wx.qlogo.cn/mmopen/jT2lu5VHvwicqdMuuiaibpMPRStnzBXK80brlfA9erkfMWbyCIF1ggWED0pv5UDswpQ9smFwMq5dOJuSz18344g7w/0',1461225688,1461225688,0),(4,'oGh9uwbY99GIBObZhNI8GnPpEEZw','芑芥',1,'','中国','','zh_CN','http://wx.qlogo.cn/mmopen/qlpfnZRbHJHjVCKTqICNz8AqKNs8RgCrXAorPYdkFicxGUMb56dz7pCsX3DwscklqibcrLL588feiaOojHuzzq37sBnmtLNc5Wn/0',1461231780,1461231780,0);
+insert  into `wx_user`(`id`,`openid`,`nickname`,`sex`,`city`,`country`,`province`,`language`,`headimgurl`,`create_time`,`update_time`,`company_id`) values (1,'oGh9uwZ3H0v9l993Ozy3kv3hRqe0','Hypnos',1,'苏州','中国','江苏','zh_CN','http://wx.qlogo.cn/mmopen/Q3auHgzwzM6dIVaJAM9sZZYuzicvTOdDyHWLyI2YE31VomQayJlI5GdApyUBsuc3TickJLq9FzGklz0LcMAr4BoSDCDHiaIjTxqelTdydYwqZ8/0',1461224490,1461224500,1),(2,'oGh9uweuonaX9YNwGpo55z9Ol3AM','流云飞扬',1,'苏州','中国','江苏','zh_CN','http://wx.qlogo.cn/mmopen/LCWtHyvj1E2Fiav7N72j907iblqeVH64TNO8MZ4ekCicZkvYicVMsbNLFXmKxoCM9Ngq4VPSAbX3qHKsVEibOKSCLQHUqeUtSmJZk/0',1461224978,1461224978,2),(3,'oGh9uwaQn8GdJQAHdv6nADfrCUkw','KAME',1,'苏州','中国','江苏','zh_CN','http://wx.qlogo.cn/mmopen/jT2lu5VHvwicqdMuuiaibpMPRStnzBXK80brlfA9erkfMWbyCIF1ggWED0pv5UDswpQ9smFwMq5dOJuSz18344g7w/0',1461225688,1461225688,2),(4,'oGh9uwbY99GIBObZhNI8GnPpEEZw','芑芥',1,'','中国','','zh_CN','http://wx.qlogo.cn/mmopen/qlpfnZRbHJHjVCKTqICNz8AqKNs8RgCrXAorPYdkFicxGUMb56dz7pCsX3DwscklqibcrLL588feiaOojHuzzq37sBnmtLNc5Wn/0',1461231780,1461231780,3);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
