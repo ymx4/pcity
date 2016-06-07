@@ -21,6 +21,16 @@ class Weixin_model extends MY_Model
         return $this->db->get()->result_array();
     }
 
+    public function role_list($where)
+    {
+        $where['company_id >'] = '0';
+        $this->db->select("{$this->table}.id,nickname");
+        $this->db->from($this->table);
+        $this->db->join('company', "company_id = company.id");
+        $this->db->where($where);
+        return $this->db->get()->result_array();
+    }
+
 	public function get_user_by_id($uid){
         $data = $this->db->get_where("wx_user",array('id'=>$uid))->row_array();
        
