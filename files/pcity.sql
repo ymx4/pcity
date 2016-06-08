@@ -109,7 +109,7 @@ CREATE TABLE `materiel` (
   `builder_id` int(11) unsigned DEFAULT '0',
   `supervisor_check` tinyint(1) unsigned DEFAULT '0',
   `builder_check` tinyint(1) unsigned DEFAULT '0',
-  `status` tinyint(1) unsigned DEFAULT '0',
+  `status` tinyint(1) unsigned DEFAULT '0' COMMENT '1:报验，2：监理通过，待建设验收，3：监理不通过，4：建设不通过，9:完成',
   `create_time` int(11) unsigned DEFAULT '0',
   `update_time` int(11) unsigned DEFAULT '0',
   PRIMARY KEY (`id`)

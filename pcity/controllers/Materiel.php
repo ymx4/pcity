@@ -48,12 +48,30 @@ class Materiel extends Wx_Controller {
         $materiel_list = $this->materiel_model->get_list($where, $limit, $offset, 'create_time');
         $data = array();
         foreach ($materiel_list as $value) {
-            $data[] = array(
+            $tmp = array(
                 'title' => $value['title'],
                 'create_time' => date('Y-m-d H:i A', $value['create_time']),
                 'url' => site_url('materiel/edit/' . $value['id']),
-                'desc' => '等待监理单位验收',
             );
+            switch ($value['status']) {
+                case 1:
+                    $tmp['desc'] => '等待监理单位验收';
+                    break;
+                case 2:
+                    $tmp['desc'] => '等待建设单位验收';
+                    break;
+                case 3:
+                    $tmp['desc'] => '验收不合格，请施工单位返工';
+                    break;
+                case 4:
+                    $tmp['desc'] => '验收不合格，请施工单位返工';
+                    break;
+                
+                default:
+                    $tmp['desc'] => '验收合格';
+                    break;
+            }
+            $data[] = $tmp;
         }
         if (count($data) < $limit) {
             $this->response($data, array('stop' => true));
