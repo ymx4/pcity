@@ -28,7 +28,7 @@
         <?php if ($_user['role'] == 1) : ?>
         <li>
           <div class="title-video" style="background:none;">
-          <a href="/materiel/add" class="bth-jia">添加</a>
+          <a href="/scene/add" class="bth-jia">添加</a>
           </div>
         </li>
         <?php endif; ?>
@@ -129,7 +129,7 @@ var comp = 0;
 var sstop = false;
 var aq = '';
 function nextpage() {
-  $.post("/materiel/getlist/" + page, {comp: comp}, function(data){
+  $.post("/scene/getlist/" + page, {comp: comp}, function(data){
       var rr = $.parseJSON(data);
       if (rr.code && rr.data && rr.data.length > 0) {
         if (comp == 0) {

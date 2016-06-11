@@ -6,3 +6,5 @@ $config['page_size'] = 10;
 $config['template_image_path'] = 'uploads/images/template/';
 $config['announcement_file_path'] = 'uploads/files/announcement/';
 $config['materiel_image_path'] = 'uploads/images/materiel/';
+$config['scene_image_path'] = 'uploads/images/scene/';
+$config['property_image_path'] = 'uploads/images/property/';

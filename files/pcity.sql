@@ -56,11 +56,11 @@ CREATE TABLE `company` (
   `create_time` int(11) DEFAULT NULL,
   `update_time` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 /*Data for the table `company` */
 
-insert  into `company`(`id`,`name`,`type`,`create_time`,`update_time`) values (1,'施工公司',1,1464573364,1464573398),(2,'监理公司',2,1464573386,1464573386),(3,'建设公司',3,1464573407,1464573407);
+insert  into `company`(`id`,`name`,`type`,`create_time`,`update_time`) values (1,'施工公司',1,1464573364,1464573398),(2,'监理公司',2,1464573386,1464573386),(3,'建设公司',3,1464573407,1464573407),(4,'物业公司',4,1465574615,1465574615);
 
 /*Table structure for table `group` */
 
@@ -103,21 +103,71 @@ CREATE TABLE `materiel` (
   `position` varchar(1000) NOT NULL DEFAULT '',
   `constructor_image` varchar(1000) NOT NULL DEFAULT '',
   `supervisor_image` varchar(1000) NOT NULL DEFAULT '',
+  `builder_image` varchar(1000) NOT NULL DEFAULT '',
   `quantity` varchar(32) DEFAULT '',
   `constructor_id` int(11) unsigned DEFAULT '0',
   `supervisor_id` int(11) unsigned DEFAULT '0',
   `builder_id` int(11) unsigned DEFAULT '0',
   `supervisor_check` tinyint(1) unsigned DEFAULT '0',
   `builder_check` tinyint(1) unsigned DEFAULT '0',
-  `status` tinyint(1) unsigned DEFAULT '0' COMMENT '1:报验，2：监理通过，待建设验收，3：监理不通过，4：建设不通过，9:完成',
+  `status` tinyint(1) unsigned DEFAULT '1' COMMENT '1:报验，2：监理通过，待建设验收，3：监理不通过，4：建设不通过，99:完成',
+  `create_time` int(11) unsigned DEFAULT '0',
+  `update_time` int(11) unsigned DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+/*Data for the table `materiel` */
+
+insert  into `materiel`(`id`,`title`,`position`,`constructor_image`,`supervisor_image`,`builder_image`,`quantity`,`constructor_id`,`supervisor_id`,`builder_id`,`supervisor_check`,`builder_check`,`status`,`create_time`,`update_time`) values (1,'建设不合格','test','201606/1-1-1465466228.jpg','201606/2-2-1465571942.jpg','201606/4-3-1465572560.jpg','test',1,2,4,2,4,4,1465287168,1465572560),(2,'建设合格','test','201606/1-1-1465525075.jpg','201606/2-2-1465571786.jpg','201606/4-3-1465572532.jpg','test',1,2,4,2,99,99,1465525075,1465572532),(3,'监理合格','testadd','201606/1-1-1465525404.jpg','201606/2-2-1465571518.jpg','','testadd',1,2,4,99,0,99,1465525404,1465571518);
+
+/*Table structure for table `property` */
+
+DROP TABLE IF EXISTS `property`;
+
+CREATE TABLE `property` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(64) NOT NULL DEFAULT '',
+  `problem_image` varchar(1000) NOT NULL DEFAULT '',
+  `fix_image` varchar(1000) NOT NULL DEFAULT '',
+  `description` text,
+  `creator_id` int(11) unsigned DEFAULT '0',
+  `property_id` int(11) unsigned DEFAULT '0',
+  `unqualified_num` int(11) unsigned DEFAULT '0',
+  `status` tinyint(1) unsigned DEFAULT '1' COMMENT '1:新建，2：通过，3：不通过',
+  `create_time` int(11) unsigned DEFAULT '0',
+  `update_time` int(11) unsigned DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+/*Data for the table `property` */
+
+insert  into `property`(`id`,`title`,`problem_image`,`fix_image`,`description`,`creator_id`,`property_id`,`unqualified_num`,`status`,`create_time`,`update_time`) values (1,'问题报验','201606/1-1-1465624437.jpg','201606/1-1-14656244371.jpg','1.问题报验\r\n2.问题报验',1,3,0,2,1465624437,1465628290),(2,'test','201606/1-1-1465628163.jpg','201606/1-1-14656281631.jpg','1test1test1test',1,3,0,3,1465628163,1465628360);
+
+/*Table structure for table `scene` */
+
+DROP TABLE IF EXISTS `scene`;
+
+CREATE TABLE `scene` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(64) NOT NULL DEFAULT '',
+  `address` varchar(1000) NOT NULL DEFAULT '',
+  `constructor_image` varchar(1000) NOT NULL DEFAULT '',
+  `supervisor_image` varchar(1000) NOT NULL DEFAULT '',
+  `builder_image` varchar(1000) NOT NULL DEFAULT '',
+  `constructor_id` int(11) unsigned DEFAULT '0',
+  `supervisor_id` int(11) unsigned DEFAULT '0',
+  `builder_id` int(11) unsigned DEFAULT '0',
+  `supervisor_check` tinyint(1) unsigned DEFAULT '0',
+  `builder_check` tinyint(1) unsigned DEFAULT '0',
+  `status` tinyint(1) unsigned DEFAULT '1' COMMENT '1:报验，2：监理通过，待建设验收，3：监理不通过，4：建设不通过，99:完成',
   `create_time` int(11) unsigned DEFAULT '0',
   `update_time` int(11) unsigned DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
-/*Data for the table `materiel` */
+/*Data for the table `scene` */
 
-insert  into `materiel`(`id`,`title`,`position`,`constructor_image`,`supervisor_image`,`quantity`,`constructor_id`,`supervisor_id`,`builder_id`,`supervisor_check`,`builder_check`,`status`,`create_time`,`update_time`) values (1,'test','test','1-1-1465287990.gif','','test',1,2,0,0,0,0,1465287168,1465287990);
+insert  into `scene`(`id`,`title`,`address`,`constructor_image`,`supervisor_image`,`builder_image`,`constructor_id`,`supervisor_id`,`builder_id`,`supervisor_check`,`builder_check`,`status`,`create_time`,`update_time`) values (1,'现场报验','现场报验','201606/1-1-1465573963.jpg','201606/3-2-1465573994.jpg','201606/4-3-1465574018.jpg',1,3,4,2,99,99,1465573963,1465574018);
 
 /*Table structure for table `task` */
 
@@ -179,7 +229,7 @@ CREATE TABLE `user_auth` (
 
 /*Data for the table `user_auth` */
 
-insert  into `user_auth`(`user_id`,`auth`) values (1,'[\"admin\"]');
+insert  into `user_auth`(`user_id`,`auth`) values (1,'[\"admin\"]'),(3,'');
 
 /*Table structure for table `wx_data_store` */
 
@@ -221,7 +271,7 @@ CREATE TABLE `wx_user` (
 
 /*Data for the table `wx_user` */
 
-insert  into `wx_user`(`id`,`openid`,`nickname`,`sex`,`city`,`country`,`province`,`language`,`headimgurl`,`create_time`,`update_time`,`company_id`) values (1,'oGh9uwZ3H0v9l993Ozy3kv3hRqe0','Hypnos',1,'苏州','中国','江苏','zh_CN','http://wx.qlogo.cn/mmopen/Q3auHgzwzM6dIVaJAM9sZZYuzicvTOdDyHWLyI2YE31VomQayJlI5GdApyUBsuc3TickJLq9FzGklz0LcMAr4BoSDCDHiaIjTxqelTdydYwqZ8/0',1461224490,1461224500,1),(2,'oGh9uweuonaX9YNwGpo55z9Ol3AM','流云飞扬',1,'苏州','中国','江苏','zh_CN','http://wx.qlogo.cn/mmopen/LCWtHyvj1E2Fiav7N72j907iblqeVH64TNO8MZ4ekCicZkvYicVMsbNLFXmKxoCM9Ngq4VPSAbX3qHKsVEibOKSCLQHUqeUtSmJZk/0',1461224978,1461224978,2),(3,'oGh9uwaQn8GdJQAHdv6nADfrCUkw','KAME',1,'苏州','中国','江苏','zh_CN','http://wx.qlogo.cn/mmopen/jT2lu5VHvwicqdMuuiaibpMPRStnzBXK80brlfA9erkfMWbyCIF1ggWED0pv5UDswpQ9smFwMq5dOJuSz18344g7w/0',1461225688,1461225688,2),(4,'oGh9uwbY99GIBObZhNI8GnPpEEZw','芑芥',1,'','中国','','zh_CN','http://wx.qlogo.cn/mmopen/qlpfnZRbHJHjVCKTqICNz8AqKNs8RgCrXAorPYdkFicxGUMb56dz7pCsX3DwscklqibcrLL588feiaOojHuzzq37sBnmtLNc5Wn/0',1461231780,1461231780,3);
+insert  into `wx_user`(`id`,`openid`,`nickname`,`sex`,`city`,`country`,`province`,`language`,`headimgurl`,`create_time`,`update_time`,`company_id`) values (1,'oGh9uwZ3H0v9l993Ozy3kv3hRqe0','Hypnos',1,'苏州','中国','江苏','zh_CN','http://wx.qlogo.cn/mmopen/Q3auHgzwzM6dIVaJAM9sZZYuzicvTOdDyHWLyI2YE31VomQayJlI5GdApyUBsuc3TickJLq9FzGklz0LcMAr4BoSDCDHiaIjTxqelTdydYwqZ8/0',1461224490,1461224500,1),(2,'oGh9uweuonaX9YNwGpo55z9Ol3AM','流云飞扬',1,'苏州','中国','江苏','zh_CN','http://wx.qlogo.cn/mmopen/LCWtHyvj1E2Fiav7N72j907iblqeVH64TNO8MZ4ekCicZkvYicVMsbNLFXmKxoCM9Ngq4VPSAbX3qHKsVEibOKSCLQHUqeUtSmJZk/0',1461224978,1461224978,2),(3,'oGh9uwaQn8GdJQAHdv6nADfrCUkw','KAME',1,'苏州','中国','江苏','zh_CN','http://wx.qlogo.cn/mmopen/jT2lu5VHvwicqdMuuiaibpMPRStnzBXK80brlfA9erkfMWbyCIF1ggWED0pv5UDswpQ9smFwMq5dOJuSz18344g7w/0',1461225688,1461225688,4),(4,'oGh9uwbY99GIBObZhNI8GnPpEEZw','芑芥',1,'','中国','','zh_CN','http://wx.qlogo.cn/mmopen/qlpfnZRbHJHjVCKTqICNz8AqKNs8RgCrXAorPYdkFicxGUMb56dz7pCsX3DwscklqibcrLL588feiaOojHuzzq37sBnmtLNc5Wn/0',1461231780,1461231780,3);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

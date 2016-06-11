@@ -9,6 +9,7 @@ class Base_Controller extends CI_Controller
         1 => '施工单位',
         2 => '监理单位',
         3 => '建设单位',
+        4 => '物业公司',
     );
     protected static $group_role = array(
         1 => '业主',
@@ -150,6 +151,7 @@ class Wx_Controller extends Base_Controller
             $vars['ptitle'] = $this->title;
             $vars['announcement_type'] = self::$announcement_type;
             $vars['template_categories'] = self::$template_categories;
+            $vars['_user'] = $this->_user;
             $this->load->view($view, $vars);
         }
     }

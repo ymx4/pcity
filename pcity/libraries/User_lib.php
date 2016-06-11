@@ -83,4 +83,17 @@ class User_lib
 
         return $result;
     }
+
+    public function get_user($id, $key = '')
+    {
+        $user = $this->CI->weixin_model->get_user_by_id($id);
+        if (empty($user)) {
+            return false;
+        }
+        if ($key) {
+            return $user[$key];
+        } else {
+            return $user;
+        }
+    }
 }

@@ -44,7 +44,7 @@
           <li class="yuan"><img src="/assets/wx/images/logo.jpg" alt=""></li>
           <li class="left-home">
             <ul class="am-list admin-sidebar-list" id="collapase-nav-1">
-              <li class="am-panel hover">
+              <li class="am-panel">
                 <a href="#" data-am-collapse="{parent: '#collapase-nav-1', target: '#company-nav'}">
                      公告 <i class="am-icon-angle-right am-fr am-margin-right"></i>
                 </a>
@@ -66,6 +66,9 @@
               </li>
             </ul>
           </li>
+          <li class="left-home"><a href="/materiel">物料管控<i class="am-icon-angle-right am-fr am-margin-right"></i></a></li>
+          <li class="left-home"><a href="/scene">现场管控<i class="am-icon-angle-right am-fr am-margin-right"></i></a></li>
+          <li class="left-home"><a href="/property">移交物业<i class="am-icon-angle-right am-fr am-margin-right"></i></a></li>
           <li class="left-home"><a href="/task/index">任务安排<i class="am-icon-angle-right am-fr am-margin-right"></i></a></li>
         </ul>
       </div>
