@@ -15,7 +15,7 @@ class Wx extends CI_Controller
         $menu = array(
             'button' => array(array(
                 'type' => 'view',
-                'name' => '公告',
+                'name' => '管理系统',
                 'url' => 'http://www.pcity.cc/announcement?wx=1',
             ))
         );
