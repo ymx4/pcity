@@ -149,6 +149,10 @@
   <input type="submit" class="am-btn am-btn-primary btn-loading-example" value="提交" style="width:97%"/>
 </figure>
 </form>
+<?php else : ?>
+<figure>
+    <a href="/property"><input type="button" class="am-btn am-btn-primary btn-loading-example" value="关闭" style="width:97%"/></a>
+</figure>
 <?php endif; ?>
 
 <?php include('_footer.php'); ?>

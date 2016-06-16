@@ -139,10 +139,10 @@ figure input.am-btn-primary{padding: 0.6em;width: 100%;background: #15b8c1;borde
 .am-offcanvas-content.clues .am-list>li{border: 0;}
 .am-offcanvas-content.clues .am-list>li>a {padding: 0;    padding-left: 10px;}
 .search{background: #fff;height: 4.76rem;width: 100%;}
-.am-form-s{width: 71%;margin:1em 0 0 1em;height: 2.4em;line-height: 2.4em;padding-left: 1em;border: 0;background: #ebe9e9;float: left; font-size: 1.2em;}
+.am-form-s{width: 71%;margin:1em 0 0 1em;height: 2.4em;line-height: 2.4em;padding-left: 1em;border: 0;background: #ebe9e9;float: left; font-size: 1em;}
 .am-btn-s{float: right;background: #15b8c1;height: 2.4em;line-height: 2.4em;margin:1em 1em 0 0;border: 0;-webkit-border-radius: 6px;
 -moz-border-radius: 6px;
-border-radius: 6px;width: 15%;color: #fff;    font-size: 1.2em;}
+border-radius: 6px;width: 15%;color: #fff;    font-size: 1em;}
 .am-li{ margin: 1em 0 0 0.8em;}
 .am-li li{}
 .am-li li a{background: #fff;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;padding: 14px;display: block;margin-right:0.8em;margin-bottom:0.2em;}
