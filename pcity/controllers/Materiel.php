@@ -18,6 +18,8 @@ class Materiel extends Wx_Controller {
 
     public function getlist($page)
     {
+        $q = $this->input->post('q');
+        $q = $q ?: '';
         $is_complete = $this->input->post('comp');
         $page = intval($page);
         $page = $page ?: 1;
@@ -46,7 +48,7 @@ class Materiel extends Wx_Controller {
                 return;
         }
 
-        $materiel_list = $this->materiel_model->get_list($where, $limit, $offset, 'create_time');
+        $materiel_list = $this->materiel_model->search_list($q, $where, $limit, $offset);
         $data = array();
         foreach ($materiel_list as $value) {
             $tmp = array(

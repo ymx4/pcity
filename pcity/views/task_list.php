@@ -1,6 +1,11 @@
 <?php include('_header.php'); ?>
 
 <div class="am-tabs" data-am-tabs="" style=" padding-top: 58px;">
+  <div class="search">
+    <input type="text" id="aq" minlength="3" placeholder="输入关键字" class="am-form-s" required="">
+    <input type="button" class="am-btn-s" value="筛选" onclick="asearch();">
+    <div class="clearfloat"></div>
+  </div>
   <?php if (!empty($_user['auth']) && (in_array('admin', $_user['auth']) || in_array('task/add', $_user['auth']))) :?>
   <a href="javascript: void(0)" class="jia" class="am-btn am-btn-success a-btn" id="doc-prompt-toggle"><img src="/assets/wx/images/jia.png" alt=""></a>
   <?php endif;?>
@@ -59,6 +64,9 @@ var aq = '';
 function nextpage() {
   $.post("/task/getlist/" + page, {q: aq}, function(data){
       var rr = $.parseJSON(data);
+      if (rr.code && rr.data && rr.data.length == 0) {
+        if (page == 1) $('.am-gao').empty();
+      }
       if (rr.code && rr.data && rr.data.length > 0) {
         if (page == 1) $('.am-gao').empty();
         $.each(rr.data,function(n, value) {

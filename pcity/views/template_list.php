@@ -17,6 +17,9 @@ var aq = '';
 function nextpage() {
   $.post("/template/getlist/<?php echo $cid; ?>/" + page, {q: aq}, function(data){
       var rr = $.parseJSON(data);
+      if (rr.code && rr.data && rr.data.length == 0) {
+        if (page == 1) $('.am-li').empty();
+      }
       if (rr.code && rr.data && rr.data.length > 0) {
         if (page == 1) $('.am-li').empty();
         $.each(rr.data,function(n, value) {

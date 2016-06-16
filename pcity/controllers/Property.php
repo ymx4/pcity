@@ -21,6 +21,8 @@ class Property extends Wx_Controller {
 
     public function getlist($page)
     {
+        $q = $this->input->post('q');
+        $q = $q ?: '';
         $is_complete = $this->input->post('comp');
         $page = intval($page);
         $page = $page ?: 1;
@@ -47,7 +49,7 @@ class Property extends Wx_Controller {
                 return;
         }
 
-        $property_list = $this->property_model->get_list($where, $limit, $offset, 'create_time');
+        $property_list = $this->property_model->search_list($q, $where, $limit, $offset);
         $data = array();
         foreach ($property_list as $value) {
             $tmp = array(

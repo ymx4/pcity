@@ -85,7 +85,7 @@ class Base_Controller extends CI_Controller
 
     public function response($data = '', $extra = false)
     {
-        if (empty($data)) {
+        if ($data === '') {
             echo json_encode(array('code' => 1));
             exit;
         } elseif (is_string($data)) {

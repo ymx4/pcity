@@ -1,24 +1,29 @@
 <?php include('_header.php'); ?>
 
 <div class="am-tabs" data-am-tabs="">
+  <div class="search">
+    <input type="text" id="aq" minlength="3" placeholder="输入关键字" class="am-form-s" required="">
+    <input type="button" class="am-btn-s" value="筛选" onclick="asearch();">
+    <div class="clearfloat"></div>
+  </div>
   
   <ul class="am-tabs-nav am-nav am-nav-tabs" style="border-top:solid 1px #cccccc;">
     <?php if ($_user['role'] == 1) : ?>
-    <li class="am-active" onclick="asearch(0)" style="width:50%">
+    <li class="am-active" onclick="tabSwitch(0)" style="width:50%">
       <a href="#tab1">施工单位</a>
     </li>
     <?php endif; ?>
     <?php if ($_user['role'] == 2) : ?>
-    <li class="am-active" onclick="asearch(0)" style="width:50%">
+    <li class="am-active" onclick="tabSwitch(0)" style="width:50%">
       <a href="#tab1">监理单位</a>
     </li>
     <?php endif; ?>
     <?php if ($_user['role'] == 3) : ?>
-    <li class="am-active" onclick="asearch(0)" style="width:50%">
+    <li class="am-active" onclick="tabSwitch(0)" style="width:50%">
       <a href="#tab1">建设单位</a>
     </li>
     <?php endif; ?>
-    <li class="" onclick="asearch(1)" style="width:50%">
+    <li class="" onclick="tabSwitch(1)" style="width:50%">
       <a href="#tab2">验收完成</a>
     </li>
   </ul>
@@ -129,8 +134,11 @@ var comp = 0;
 var sstop = false;
 var aq = '';
 function nextpage() {
-  $.post("/scene/getlist/" + page, {comp: comp}, function(data){
+  $.post("/scene/getlist/" + page, {comp: comp,q: aq}, function(data){
       var rr = $.parseJSON(data);
+      if (rr.code && rr.data && rr.data.length == 0) {
+        if (page == 1) $('li.li-m').remove();
+      }
       if (rr.code && rr.data && rr.data.length > 0) {
         if (comp == 0) {
           var mid = "#list-m";
@@ -159,7 +167,7 @@ function nextpage() {
   });
 }
 
-function asearch(tcomp)
+function tabSwitch(tcomp)
 {
   if (comp == tcomp) {
     return;
@@ -167,7 +175,16 @@ function asearch(tcomp)
   page = 1;
   comp = tcomp;
   sstop = false;
-  aq = '';//$('#aq').val();
+  $('#aq').val('');
+  aq = '';
+  nextpage();
+}
+
+function asearch()
+{
+  page = 1;
+  sstop = false;
+  aq = $('#aq').val();
   nextpage();
 }
 
