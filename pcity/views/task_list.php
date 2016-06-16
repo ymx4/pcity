@@ -1,7 +1,9 @@
 <?php include('_header.php'); ?>
 
 <div class="am-tabs" data-am-tabs="" style=" padding-top: 58px;">
+  <?php if (!empty($_user['auth']) && (in_array('admin', $_user['auth']) || in_array('task/add', $_user['auth']))) :?>
   <a href="javascript: void(0)" class="jia" class="am-btn am-btn-success a-btn" id="doc-prompt-toggle"><img src="/assets/wx/images/jia.png" alt=""></a>
+  <?php endif;?>
   <ul class="am-gao cll">
   </ul>
 

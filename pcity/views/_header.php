@@ -66,9 +66,13 @@
               </li>
             </ul>
           </li>
+          <?php if (in_array($_user['role'], array(1,2,3))) :?>
           <li class="left-home"><a href="/materiel">物料管控<i class="am-icon-angle-right am-fr am-margin-right"></i></a></li>
           <li class="left-home"><a href="/scene">现场管控<i class="am-icon-angle-right am-fr am-margin-right"></i></a></li>
+          <?php endif; ?>
+          <?php if (in_array($_user['role'], array(4,5))) :?>
           <li class="left-home"><a href="/property">移交物业<i class="am-icon-angle-right am-fr am-margin-right"></i></a></li>
+          <?php endif; ?>
           <li class="left-home"><a href="/task/index">任务安排<i class="am-icon-angle-right am-fr am-margin-right"></i></a></li>
         </ul>
       </div>

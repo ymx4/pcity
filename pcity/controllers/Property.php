@@ -11,7 +11,7 @@ class Property extends Wx_Controller {
 
     public function index()
     {
-        if ($this->_user['role'] != 1 && $this->_user['role'] != 4) {
+        if ($this->_user['role'] != 5 && $this->_user['role'] != 4) {
             show_404();
         }
         $this->head_title('移交物业');
@@ -34,7 +34,7 @@ class Property extends Wx_Controller {
             $where['status <>'] = 2;
         }
         switch ($this->_user['role']) {
-            case 1:
+            case 5:
                 $where['creator_id'] = $this->_user['id'];
                 break;
 
@@ -69,7 +69,7 @@ class Property extends Wx_Controller {
         $data = array('status' => 0);
         $where = array('id' => $id);
         switch ($this->_user['role']) {
-            case 1:
+            case 5:
                 $where['creator_id'] = $this->_user['id'];
                 break;
 

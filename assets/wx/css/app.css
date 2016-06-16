@@ -1,1 +1,6 @@
 /* Write your styles */
+
+.am-gao a{
+	overflow:hidden;
+	text-overflow:ellipsis;
+}

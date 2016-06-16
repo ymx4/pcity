@@ -3,7 +3,7 @@
 <div class="am-tabs" data-am-tabs="">
   
   <ul class="am-tabs-nav am-nav am-nav-tabs" style="border-top:solid 1px #cccccc;">
-    <?php if ($_user['role'] == 1) : ?>
+    <?php if ($_user['role'] == 5) : ?>
     <li class="am-active" onclick="asearch(0)" style="width:50%">
       <a href="#tab1">地产公司</a>
     </li>
@@ -20,7 +20,7 @@
   <div class="am-tabs-bd" >
     <div class="am-tab-panel am-fade am-active am-in" id="tab1">
       <ul>
-        <?php if ($_user['role'] == 1) : ?>
+        <?php if ($_user['role'] == 5) : ?>
         <li>
           <div class="title-video" style="background:none;">
           <a href="/property/add" class="bth-jia">添加</a>

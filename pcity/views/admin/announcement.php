@@ -28,7 +28,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>上传</label>
+                            <label>上传 (doc|docx|pdf|jpg|jpeg|png)</label>
                             <?php if (!empty($announcement_file)) echo sprintf('<a href="%s">%s</a>', $announcement_file, $announcement['file_name']); ?>
                             <input type="file" name="up_file">
                         </div>

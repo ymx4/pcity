@@ -53,7 +53,7 @@
       <tr style="margin-top: 9px;">
         <th width="20%">物料数量</th>
         <td>
-          <input type="text" style="width: 94%;" name="quantity" value="<?php echo $materiel['quantity']; ?>" minlength="3" placeholder="填写时加上单位" class="am-form-field" required/>
+          <input type="text" style="width: 94%;" name="quantity" value="<?php echo $materiel['quantity']; ?>" minlength="1" placeholder="填写时加上单位" class="am-form-field" required/>
         </td>
       </tr>
       <tr>
