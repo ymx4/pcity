@@ -16,7 +16,7 @@ class User_lib
 
     public function is_logged_in()
     {
-        $user = $this->CI->session->userdata('user_auth');
+        $user = $this->CI->session->tempdata('user_auth');
         return empty($user) ? false : true;
     }
 
@@ -32,9 +32,7 @@ class User_lib
             } else {
                 $user['role'] = 0;
             }
-            $this->CI->session->set_userdata(array(
-                'user_auth' => $user
-            ));
+            $this->CI->session->set_tempdata('user_auth', $user, 7200);
             return $user;
         } else {
             return false;
@@ -52,9 +50,7 @@ class User_lib
         } else {
             $user['role'] = 0;
         }
-        $this->CI->session->set_userdata(array(
-            'user_auth' => $user
-        ));
+        $this->CI->session->set_tempdata('user_auth', $user, 7200);
         return $user;
     }
 
@@ -70,7 +66,7 @@ class User_lib
 
     public function logout()
     {
-        $this->CI->session->unset_userdata('user_auth');
+        $this->CI->session->unset_tempdata('user_auth');
         $this->CI->session->sess_destroy();
     }
 
@@ -80,7 +76,7 @@ class User_lib
             return null;
         }
 
-        $user = $this->CI->session->userdata('user_auth');
+        $user = $this->CI->session->tempdata('user_auth');
 
         if (!empty($key)) {
             $result = isset($user[$key]) ? $user[$key] : null;
