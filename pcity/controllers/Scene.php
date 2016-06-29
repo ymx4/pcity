@@ -16,6 +16,13 @@ class Scene extends Wx_Controller {
     	$this->view('scene_list');
     }
 
+    public function complete()
+    {
+        $this->head_title('现场管控');
+
+        $this->view('scene_complete');
+    }
+
     public function getlist($page)
     {
         $q = $this->input->post('q');
@@ -25,27 +32,33 @@ class Scene extends Wx_Controller {
         $page = $page ?: 1;
         $limit = $this->config->item('page_size');
         $offset = $limit * ($page - 1);
+        $total = $this->input->post('total');
 
-        $where = array();
-        if ($is_complete) {
-            $where['status'] = 99;
+        if ($total) {
+            $where = array('status' => 99);
         } else {
-            $where['status <'] = 99;
-        }
-        switch ($this->_user['role']) {
-            case 1:
-                $where['constructor_id'] = $this->_user['id'];
-                break;
-            case 2:
-                $where['supervisor_id'] = $this->_user['id'];
-                break;
-            case 3:
-                $where['builder_id'] = $this->_user['id'];
-                break;
 
-            default:
-                $this->response('无权限');
-                return;
+            $where = array();
+            if ($is_complete) {
+                $where['status'] = 99;
+            } else {
+                $where['status <'] = 99;
+            }
+            switch ($this->_user['role']) {
+                case 1:
+                    $where['constructor_id'] = $this->_user['id'];
+                    break;
+                case 2:
+                    $where['supervisor_id'] = $this->_user['id'];
+                    break;
+                case 3:
+                    $where['builder_id'] = $this->_user['id'];
+                    break;
+
+                default:
+                    $this->response('无权限');
+                    return;
+            }
         }
 
         $scene_list = $this->scene_model->search_list($q, $where, $limit, $offset);
@@ -125,7 +138,7 @@ class Scene extends Wx_Controller {
                 break;
 
             default:
-                $this->response('无权限');
+                $where['status'] = 99;
                 return;
         }
         $data['scene'] = $this->scene_model->get_one($where);

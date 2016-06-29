@@ -10,7 +10,7 @@ class Base_Controller extends CI_Controller
         2 => '监理单位',
         3 => '建设单位',
         4 => '物业公司',
-        5 => '地产公司',
+        // 5 => '地产公司',
     );
     protected static $group_role = array(
         1 => '业主',

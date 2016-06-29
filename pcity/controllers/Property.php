@@ -11,12 +11,19 @@ class Property extends Wx_Controller {
 
     public function index()
     {
-        if ($this->_user['role'] != 5 && $this->_user['role'] != 4) {
+        if ($this->_user['role'] != 3 && $this->_user['role'] != 4) {
             show_404();
         }
         $this->head_title('移交物业');
 
     	$this->view('property_list');
+    }
+
+    public function complete()
+    {
+        $this->head_title('移交物业');
+
+        $this->view('property_complete');
     }
 
     public function getlist($page)
@@ -28,25 +35,31 @@ class Property extends Wx_Controller {
         $page = $page ?: 1;
         $limit = $this->config->item('page_size');
         $offset = $limit * ($page - 1);
+        $total = $this->input->post('total');
 
-        $where = array();
-        if ($is_complete) {
-            $where['status'] = 2;
+        if ($total) {
+            $where = array('status' => 2);
         } else {
-            $where['status <>'] = 2;
-        }
-        switch ($this->_user['role']) {
-            case 5:
-                $where['creator_id'] = $this->_user['id'];
-                break;
 
-            case 4:
-                $where['property_id'] = $this->_user['id'];
-                break;
+            $where = array();
+            if ($is_complete) {
+                $where['status'] = 2;
+            } else {
+                $where['status <>'] = 2;
+            }
+            switch ($this->_user['role']) {
+                case 3:
+                    $where['creator_id'] = $this->_user['id'];
+                    break;
 
-            default:
-                $this->response('无权限');
-                return;
+                case 4:
+                    $where['property_id'] = $this->_user['id'];
+                    break;
+
+                default:
+                    $this->response('无权限');
+                    return;
+            }
         }
 
         $property_list = $this->property_model->search_list($q, $where, $limit, $offset);
@@ -71,7 +84,7 @@ class Property extends Wx_Controller {
         $data = array('status' => 0);
         $where = array('id' => $id);
         switch ($this->_user['role']) {
-            case 5:
+            case 3:
                 $where['creator_id'] = $this->_user['id'];
                 break;
 
@@ -80,7 +93,7 @@ class Property extends Wx_Controller {
                 break;
 
             default:
-                $this->response('无权限');
+                $where['status'] = 2;
                 return;
         }
         $data['property'] = $this->property_model->get_one($where);

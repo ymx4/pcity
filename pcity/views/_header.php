@@ -44,6 +44,22 @@
           <li class="yuan"><img src="/assets/wx/images/logo.jpg" alt=""></li>
           <li class="left-home">
             <ul class="am-list admin-sidebar-list" id="collapase-nav-1">
+              <?php if (in_array($_user['role'], array(1,2,3,4))) :?>
+              <li class="am-panel">
+                <a data-am-collapse="{parent: '#collapase-nav-1', target: '#my-nav'}">
+                    我的 <i class="am-icon-angle-right am-fr am-margin-right"></i>
+                </a>
+                <ul class="am-list am-collapse admin-sidebar-sub" id="my-nav">
+                  <?php if (in_array($_user['role'], array(1,2,3))) :?>
+                  <li><a href="/materiel">物料管控</a></li>
+                  <li><a href="/scene">现场管控</a></li>
+                  <?php endif; ?>
+                  <?php if (in_array($_user['role'], array(3,4))) :?>
+                  <li><a href="/property">移交物业</a></li>
+                  <?php endif; ?>
+                </ul>
+              </li>
+              <?php endif; ?>
               <li class="am-panel">
                 <a href="#" data-am-collapse="{parent: '#collapase-nav-1', target: '#company-nav'}">
                      公告 <i class="am-icon-angle-right am-fr am-margin-right"></i>
@@ -66,13 +82,9 @@
               </li>
             </ul>
           </li>
-          <?php if (in_array($_user['role'], array(1,2,3))) :?>
-          <li class="left-home"><a href="/materiel">物料管控<i class="am-icon-angle-right am-fr am-margin-right"></i></a></li>
-          <li class="left-home"><a href="/scene">现场管控<i class="am-icon-angle-right am-fr am-margin-right"></i></a></li>
-          <?php endif; ?>
-          <?php if (in_array($_user['role'], array(4,5))) :?>
-          <li class="left-home"><a href="/property">移交物业<i class="am-icon-angle-right am-fr am-margin-right"></i></a></li>
-          <?php endif; ?>
+          <li class="left-home"><a href="/materiel/complete">物料管控<i class="am-icon-angle-right am-fr am-margin-right"></i></a></li>
+          <li class="left-home"><a href="/scene/complete">现场管控<i class="am-icon-angle-right am-fr am-margin-right"></i></a></li>
+          <li class="left-home"><a href="/property/complete">移交物业<i class="am-icon-angle-right am-fr am-margin-right"></i></a></li>
           <li class="left-home"><a href="/task/index">任务安排<i class="am-icon-angle-right am-fr am-margin-right"></i></a></li>
         </ul>
       </div>

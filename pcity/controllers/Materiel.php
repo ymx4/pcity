@@ -16,7 +16,14 @@ class Materiel extends Wx_Controller {
     	$this->view('materiel_list');
     }
 
-    public function getlist($page)
+    public function complete()
+    {
+        $this->head_title('物料管控');
+
+        $this->view('materiel_complete');
+    }
+
+    public function getlist($page = 1)
     {
         $q = $this->input->post('q');
         $q = $q ?: '';
@@ -25,27 +32,32 @@ class Materiel extends Wx_Controller {
         $page = $page ?: 1;
         $limit = $this->config->item('page_size');
         $offset = $limit * ($page - 1);
+        $total = $this->input->post('total');
 
-        $where = array();
-        if ($is_complete) {
-            $where['status'] = 99;
+        if ($total) {
+            $where = array('status' => 99);
         } else {
-            $where['status <'] = 99;
-        }
-        switch ($this->_user['role']) {
-            case 1:
-                $where['constructor_id'] = $this->_user['id'];
-                break;
-            case 2:
-                $where['supervisor_id'] = $this->_user['id'];
-                break;
-            case 3:
-                $where['builder_id'] = $this->_user['id'];
-                break;
+            $where = array();
+            if ($is_complete) {
+                $where['status'] = 99;
+            } else {
+                $where['status <'] = 99;
+            }
+            switch ($this->_user['role']) {
+                case 1:
+                    $where['constructor_id'] = $this->_user['id'];
+                    break;
+                case 2:
+                    $where['supervisor_id'] = $this->_user['id'];
+                    break;
+                case 3:
+                    $where['builder_id'] = $this->_user['id'];
+                    break;
 
-            default:
-                $this->response('无权限');
-                return;
+                default:
+                    $this->response('无权限');
+                    return;
+            }
         }
 
         $materiel_list = $this->materiel_model->search_list($q, $where, $limit, $offset);
@@ -125,7 +137,7 @@ class Materiel extends Wx_Controller {
                 break;
 
             default:
-                $this->response('无权限');
+                $where['status'] = 99;
                 return;
         }
         $data['materiel'] = $this->materiel_model->get_one($where);
